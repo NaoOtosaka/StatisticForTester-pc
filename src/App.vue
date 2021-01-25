@@ -1,16 +1,13 @@
 <template>
   <div id="app">
     <el-container>
+<!--      主banner-->
       <el-header>
-        <Banner v-on:sendNavTag="getNavTag"/>
+        <Banner v-on:sendNavType="getNavTag" v-on:sendNavStatus="getNavTag"/>
       </el-header>
+<!--        页面视图-->
       <el-container>
-        <el-aside style="width: auto">
-          <NavMenu :isCollapse=navTag></NavMenu>
-        </el-aside>
-        <el-main>
-          <router-view/>
-        </el-main>
+        <router-view :navTag="navTag"/>
       </el-container>
     </el-container>
   </div>
@@ -23,51 +20,34 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
+  margin-top: 0;
 }
 
 #nav a {
   font-weight: bold;
   color: #2c3e50;
 }
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-
-.el-header {
-  background-color: #B3C0D1;
-  color: #333;
-  line-height: 60px;
-}
-
-.el-aside {
-  color: #333;
-}
 </style>
 
 <script>
-import NavMenu from "@/components/NavMenu";
 import Banner from "@/components/Banner";
 
 export default {
   components: {
-    NavMenu,
     Banner
   },
   data() {
     return {
-      navTag: false
+      navTag: false,
+      activeIndex: '1'
     }
   },
   methods: {
     getNavTag(v) {
       console.log(1)
       this.navTag = v;
-    }
+    },
+
   }
 };
 </script>

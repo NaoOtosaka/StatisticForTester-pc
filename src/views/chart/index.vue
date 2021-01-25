@@ -1,19 +1,14 @@
+<!--图表页面主框架-->
 <template>
-    <el-container>
-      <el-header class="el-header">
-        <Banner v-on:sendNavTag="getNavTag"/>
-      </el-header>
-      <el-container>
-        <el-aside width="auto">
-          <NavMenu :isCollapse=navTag></NavMenu>
-        </el-aside>
-<!--        <el-main>-->
-
-<!--        </el-main>-->
-
-      </el-container>
+  <el-container>
+    <el-aside width="auto">
+      <!--        纵向导航-->
+      <ChartNavMenu :isCollapse="navTag"></ChartNavMenu>
+    </el-aside>
+    <el-main>
       <bug :data="bug_data"/>
-    </el-container>
+    </el-main>
+  </el-container>
 </template>
 
 
@@ -26,20 +21,22 @@
 </style>
 
 <script>
-import NavMenu from "../components/NavMenu";
+import ChartNavMenu from "@/components/navmenu/ChartNavMenu";
 import bug from "@/components/bug";
 import Banner from "@/components/Banner";
 
 export default {
+  props:[
+    "navTag"
+  ],
   components: {
-    NavMenu,
+    ChartNavMenu,
     bug,
     Banner
   },
   data() {
     return {
-      bug_data: [],
-      navTag: false
+      bug_data: []
     }
   },
   methods: {

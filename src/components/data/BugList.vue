@@ -1,6 +1,5 @@
 <template>
   <div>
-<!--    {{ reversedMessage }}-->
     <el-table
         :data="data"
         border
