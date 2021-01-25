@@ -1,11 +1,10 @@
 <template>
   <el-menu
-      :default-active="$route.path"
+      default-active="1"
       class="el-menu-vertical-demo"
       @open="handleOpen"
       @close="handleClose"
-      :collapse="isCollapse"
-      router>
+      :collapse="isCollapse">
     <el-menu-item index="1">
       <i class="el-icon-menu"></i>
       <span slot="title">项目</span>
@@ -22,29 +21,25 @@
       <i class="el-icon-document"></i>
       <span slot="title">策划</span>
     </el-menu-item>
-    <el-menu-item index="/data/bug">
+    <el-menu-item @click="toUrl('/data/bug')">
       <i class="el-icon-setting"></i>
       <span slot="title">BUG</span>
     </el-menu-item>
   </el-menu>
 </template>
 
-
-<style>
-.el-menu-vertical-demo:not(.el-menu--collapse) {
-  width: 200px;
-  min-height: 400px;
-}
-</style>
-
 <script>
 export default {
   props: ["isCollapse"],
   data() {
     return {
+
     };
   },
   methods: {
+    toUrl(url){
+      this.$router.push(url)
+    },
     handleOpen(key, keyPath) {
       console.log(key, keyPath);
     },
@@ -54,3 +49,11 @@ export default {
   }
 }
 </script>
+
+<style>
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+  width: 200px;
+  min-height: 400px;
+}
+</style>
+

@@ -1,7 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-import * as path from "path";
 
 Vue.use(VueRouter)
 
@@ -9,7 +7,7 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: () => import('../views/dashboard/index')
   },
   {
     path: '/about',
