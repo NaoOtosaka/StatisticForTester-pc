@@ -19,7 +19,7 @@
     </el-menu-item>
     <el-menu-item index="4">
       <i class="el-icon-document"></i>
-      <span slot="title">策划</span>
+      <span slot="title">策划1</span>
     </el-menu-item>
     <el-menu-item @click="toUrl('/data/bug')">
       <i class="el-icon-setting"></i>
