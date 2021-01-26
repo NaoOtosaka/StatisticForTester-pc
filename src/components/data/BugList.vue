@@ -1,5 +1,4 @@
 <template>
-  <div>
     <el-table
         :data="data"
         border
@@ -7,8 +6,7 @@
         :height="tableHeight"
         :default-sort = "{order: 'descending'}"
         ref="table"
-        stripe
-        >
+        stripe>
       <el-table-column v-for="(item,index) in reversedMessage" :key="index"
           :prop="item.type"
           :label="item.name"
@@ -18,7 +16,6 @@
       >
       </el-table-column>
     </el-table>
-  </div>
 </template>
 
 <script>
@@ -34,7 +31,6 @@ export default {
     // 计算属性的 getter
     reversedMessage: function () {
       if(this.data.length > 0){
-        // `this` 指向 vm 实例
         let item = this.data[0]
         console.log(item)
         let temp = []

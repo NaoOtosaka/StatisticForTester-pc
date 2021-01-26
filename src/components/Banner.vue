@@ -4,7 +4,6 @@
         :default-active="$route.path"
         class="el-menu-demo"
         mode="horizontal"
-        @select="handleSelect"
         background-color="#545c64"
         text-color="#fff"
         active-text-color="#ffd04b"
@@ -32,18 +31,9 @@ export default {
   },
   methods: {
     changeNavStatus() {
-      // console.log(this.isCollapse)
       this.isCollapse = !this.isCollapse
       this.$emit('sendNavStatus', this.isCollapse)
     },
-    changeActiveIndex() {
-      console.log(12312412)
-      console.log(this.activeIndex)
-      this.$emit('sendNavType', this.activeIndex)
-    },
-    handleSelect(key, keyPath) {
-      // console.log(key, keyPath);
-    }
   }
 
 }
