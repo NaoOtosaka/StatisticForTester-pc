@@ -3,16 +3,18 @@
     <el-container>
 <!--      主banner-->
       <el-header>
-        <Banner v-on:sendNavType="getNavType" v-on:sendNavStatus="getNavTag"/>
+        <Banner v-on:sendNavType="getNavType" v-on:sendNavStatus="getNavTag" @sendNavType=""/>
       </el-header>
 <!--        纵向导航-->
+      <el-container>
       <el-aside width="auto">
-        <NavMenu :navList="navList[activeIndex - 1]" :isCollapse="navTag"></NavMenu>
+        <NavMenu :navList="navList[activeIndex]" :isCollapse="navTag"></NavMenu>
       </el-aside>
 <!--        页面视图-->
-      <el-container>
+      <el-main>
         <router-view :navTag="navTag"/>
-      </el-container>
+      </el-main>
+    </el-container>
     </el-container>
   </div>
 </template>
@@ -45,7 +47,7 @@ export default {
   data() {
     return {
       navTag: false,
-      activeIndex: '1',
+      activeIndex: '0',
       navList: [
         [
           {

@@ -1,13 +1,14 @@
 <template>
   <el-menu
-      default-active="1"
+      default-active="0"
       class="el-menu-vertical-demo"
       @open="handleOpen"
       @close="handleClose"
       :collapse="isCollapse">
     <el-menu-item
         v-for="(item,index) in navList" :key="index"
-        @click="toUrl(item.routePath)">
+        @click="toUrl(item.routePath)"
+        :index="index.toString()">
       <i class="el-icon-setting"></i>
       <span slot="title">{{ item.name }}</span>
     </el-menu-item>

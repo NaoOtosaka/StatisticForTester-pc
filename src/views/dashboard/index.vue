@@ -1,24 +1,7 @@
 <!--仪表盘主框架-->
 <template>
-    <el-container>
-      <el-aside width="auto">
-<!--        纵向导航-->
-        <DashBoardNavMenu :isCollapse="navTag"></DashBoardNavMenu>
-      </el-aside>
-      <el-main>
-        <bug :data="bug_data"/>
-      </el-main>
-    </el-container>
+    <bug :data="bug_data"/>
 </template>
-
-
-<style>
-.el-header {
-  background-color: #545c64;
-  color: #545c64;
-  line-height:60px;
-}
-</style>
 
 <script>
 import DashBoardNavMenu from "@/components/navmenu/DashBoardNavMenu";

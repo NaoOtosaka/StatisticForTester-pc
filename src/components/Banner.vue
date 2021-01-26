@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-menu
-        default-active="1"
+        default-active="0"
         class="el-menu-demo"
         mode="horizontal"
         background-color="#545c64"
@@ -11,10 +11,13 @@
         <el-button size="mini" class="el-icon-arrow-left" v-if="!isCollapse" type="info" circle></el-button>
         <el-button size="mini" class="el-icon-arrow-right" v-else type="info" circle></el-button>
       </el-menu-item>
-      <el-menu-item @click="changeNavType(index)" index="1">仪表盘</el-menu-item>
-      <el-menu-item @click="changeNavType(index)" index="2">数据</el-menu-item>
-      <el-menu-item @click="changeNavType(index)" index="3" >图表</el-menu-item>
-      <el-menu-item @click="changeNavType(index)" index="4" >设置</el-menu-item>
+      <el-menu-item
+          v-for="(item, key) in bannerList"
+          :key="key"
+          @click="changeNavType(key)"
+          :index='key.toString()'>
+        {{ item }}
+      </el-menu-item>
     </el-menu>
 
   </div>
@@ -26,6 +29,12 @@ export default {
     return {
       isCollapse: false,
       activeIndex: '1',
+      bannerList: [
+          '仪表盘',
+          '数据',
+          '图标',
+          '设置'
+      ]
     }
   },
   methods: {
@@ -33,8 +42,8 @@ export default {
       this.isCollapse = !this.isCollapse
       this.$emit('sendNavStatus', this.isCollapse)
     },
-    changeNavType() {
-      console.log(this.$refs)
+    changeNavType(index) {
+      this.activeIndex = index
       this.$emit('sendNavType', this.activeIndex)
     }
   }
