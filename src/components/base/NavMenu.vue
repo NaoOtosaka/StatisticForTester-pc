@@ -27,7 +27,6 @@ export default {
   props: ["navList", "isCollapse"],
   data() {
     return {
-      isCollapse: false
     };
   },
   computed: {

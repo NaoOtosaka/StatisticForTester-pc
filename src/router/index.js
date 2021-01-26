@@ -18,11 +18,6 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
   {
-    path: '/dashboard',
-    name: '仪表盘',
-    component: () => import('../views/dashboard/index')
-  },
-  {
     path: '/data',
     name: '数据',
     component: () => import('../views/data/index'),
