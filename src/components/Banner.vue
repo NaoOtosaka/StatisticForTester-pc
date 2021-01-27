@@ -1,5 +1,4 @@
 <template>
-  <div>
     <el-menu
         default-active="0"
         class="el-menu-demo"
@@ -14,13 +13,11 @@
       <el-menu-item
           v-for="(item, key) in bannerList"
           :key="key"
-          @click="changeNavType(key)"
+          @click="changeNavType(key);toUrl(item.routePath)"
           :index='key.toString()'>
-        {{ item }}
+        {{ item.name }}
       </el-menu-item>
     </el-menu>
-
-  </div>
 </template>
 
 <script>
@@ -30,14 +27,29 @@ export default {
       isCollapse: false,
       activeIndex: '1',
       bannerList: [
-          '仪表盘',
-          '数据',
-          '图标',
-          '设置'
+        {
+          name: '仪表盘',
+          routePath: '/dashboard'
+        },
+        {
+          name: '数据',
+          routePath: '/data'
+        },
+        {
+          name: '图表',
+          routePath: '/chart'
+        },
+        {
+          name: '设置',
+          routePath: '/setting'
+        }
       ]
     }
   },
   methods: {
+    toUrl(url){
+      this.$router.push(url)
+    },
     changeNavStatus() {
       this.isCollapse = !this.isCollapse
       this.$emit('sendNavStatus', this.isCollapse)

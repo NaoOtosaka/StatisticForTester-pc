@@ -6,25 +6,46 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'Home',
+    name: '仪表盘',
     component: () => import('../views/dashboard/index')
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: '/dashboard',
+    name: '仪表盘',
+    component: () => import('../views/dashboard/index')
   },
   {
     path: '/data',
-    name: '数据',
     component: () => import('../views/data/index'),
     children:[
       {
-        path: '/bug',
-        component: () => import('../components/data/BugList')
+        path:'/',
+        redirect:'project'
+      },
+      {
+        path: 'project',
+        name: '项目数据表',
+        component: () => import('../views/data/project')
+      },
+      {
+        path: 'developer',
+        name: '开发数据表',
+        component: () => import('../views/data/developer')
+      },
+      {
+        path: 'tester',
+        name: '测试数据表',
+        component: () => import('../views/data/tester')
+      },
+      // {
+      //   path: 'planner',
+      //   name: '策划数据表',
+      //   component: () => import('../views/data/planner')
+      // },
+      {
+        path: 'bug',
+        name: 'BUG数据表',
+        component: () => import('../views/data/bug')
       }
     ]
   },

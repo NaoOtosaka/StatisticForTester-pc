@@ -6,10 +6,10 @@
       @close="handleClose"
       :collapse="isCollapse">
     <el-menu-item
-        v-for="(item,index) in navList" :key="index"
+        v-for="(item, index) in navList" :key="index"
         @click="toUrl(item.routePath)"
         :index="index.toString()">
-      <i class="el-icon-setting"></i>
+      <i :class="item.icon"></i>
       <span slot="title">{{ item.name }}</span>
     </el-menu-item>
   </el-menu>

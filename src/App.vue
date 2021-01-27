@@ -2,19 +2,19 @@
   <div id="app">
     <el-container>
 <!--      主banner-->
-      <el-header>
+      <el-header style="padding: 0">
         <Banner v-on:sendNavType="getNavType" v-on:sendNavStatus="getNavTag" @sendNavType=""/>
       </el-header>
 <!--        纵向导航-->
       <el-container>
-      <el-aside width="auto">
-        <NavMenu :navList="navList[activeIndex]" :isCollapse="navTag"></NavMenu>
-      </el-aside>
-<!--        页面视图-->
-      <el-main>
-        <router-view :navTag="navTag"/>
-      </el-main>
-    </el-container>
+        <el-aside width="auto">
+          <NavMenu :navList="navList[activeIndex]" :isCollapse="navTag"></NavMenu>
+        </el-aside>
+  <!--        页面视图-->
+        <el-main>
+          <router-view></router-view>
+        </el-main>
+      </el-container>
     </el-container>
   </div>
 </template>
@@ -52,61 +52,74 @@ export default {
         [
           {
             name: "总览",
-            routePath: "/dashboard"
+            routePath: "/dashboard",
+            icon: 'el-icon-monitor'
           },
           {
             name: "管理",
-            routePath: "/dashboard/manage"
+            routePath: "/dashboard/manage",
+            icon: 'el-icon-s-operation'
           }
         ],
         [
           {
             name: "项目",
-            routePath: "/dashboard"
+            routePath: "/data/project",
+            icon: 'el-icon-bank-card'
           },
           {
             name: "开发",
-            routePath: "/dashboard/manage"
+            routePath: "/data/developer",
+            icon: 'el-icon-user'
           },
           {
             name: "测试",
-            routePath: "/dashboard/manage"
+            routePath: "/data/tester",
+            icon: 'el-icon-user'
           },
-          {
-            name: "策划",
-            routePath: "/dashboard/manage"
-          },
+          // {
+          //   name: "策划",
+          //   routePath: "/data/planner",
+          //   icon: 'el-icon-user'
+          // },
           {
             name: "BUG",
-            routePath: "/data/bug"
+            routePath: "/data/bug",
+            icon: 'el-icon-cpu'
           },
         ],
         [
           {
             name: "项目图表",
-            routePath: "/dashboard"
+            routePath: "/dashboard",
+            icon: 'el-icon-pie-chart'
           },
           {
             name: "开发图表",
-            routePath: "/dashboard/manage"
+            routePath: "/dashboard/manage",
+            icon: 'el-icon-pie-chart'
           },
           {
             name: "测试图表",
-            routePath: "/dashboard/manage"
+            routePath: "/dashboard/manage",
+            icon: 'el-icon-pie-chart'
           },
           {
             name: "策划图表",
-            routePath: "/dashboard/manage"
+            routePath: "/dashboard/manage",
+            icon: 'el-icon-pie-chart'
           },
           {
             name: "BUG图表",
-            routePath: "/data/bug"
+            routePath: "/data/bug",
+            icon: 'el-icon-pie-chart'
           },
         ],
         [
           {
             name: "全局",
-            routePath: "/dashboard"
+            routePath: "/dashboard",
+            icon: 'el-icon-setting'
           }
         ],
       ]
