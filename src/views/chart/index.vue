@@ -1,61 +1,41 @@
 <!--图表页面主框架-->
 <template>
-  <el-container>
-    <el-aside width="auto">
-      <!--        纵向导航-->
-      <ChartNavMenu :isCollapse="navTag"></ChartNavMenu>
-    </el-aside>
-    <el-main>
-      <bug :data="bug_data"/>
-    </el-main>
-  </el-container>
+  <div id="app">
+    <div id="main1" style="width: 600px;height:400px;"></div>
+  </div>
 </template>
 
-
-<style>
-.el-header {
-  background-color: #545c64;
-  color: #545c64;
-  line-height:60px;
-}
-</style>
-
 <script>
-import ChartNavMenu from "@/components/navmenu/ChartNavMenu";
-import bug from "@/components/bug";
-import Banner from "@/components/Banner";
-
 export default {
-  props:[
-    "navTag"
-  ],
-  components: {
-    ChartNavMenu,
-    bug,
-    Banner
-  },
-  data() {
-    return {
-      bug_data: []
-    }
-  },
+  name: 'Echarts',
   methods: {
-    test(){
-      this.axios({
-        url: "/api/v1/bug/list",
-        method: "get",
-        params: {}
-      }).then(res => {
-        this.bug_data = res.data.data
-      })
-    },
-    getNavTag(v) {
-      console.log(1)
-      this.navTag = v;
+    drawChart() {
+      // 基于准备好的dom，初始化echarts实例
+      let myChart = this.echarts.init(document.getElementById("main"));
+      // 指定图表的配置项和数据
+      var option = {
+        title: {
+          text: 'ECharts 入门示例'
+        },
+        tooltip: {},
+        legend: {
+          data:['销量']
+        },
+        xAxis: {
+          data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+        },
+        yAxis: {},
+        series: [{
+          name: '销量',
+          type: 'bar',
+          data: [5, 20, 36, 10, 10, 20]
+        }]
+      };
+      myChart.setOption(option);
     }
   },
   mounted() {
-    this.test()
+    this.drawChart();
   }
-};
+}
 </script>
