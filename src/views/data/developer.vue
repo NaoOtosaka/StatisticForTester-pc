@@ -18,7 +18,7 @@ export default {
     }
   },
   methods: {
-    test(){
+    developerList(){
       this.axios({
         url: "/api/v1/developer/list",
         method: "get",
@@ -29,7 +29,7 @@ export default {
     }
   },
   mounted() {
-    this.test()
+    this.developerList()
   }
 };
 </script>

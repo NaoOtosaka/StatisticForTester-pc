@@ -1,12 +1,12 @@
 <!--仪表盘主框架-->
 <template>
-    <bug :data="bug_data"/>
+  <bug :data="bug_data"/>
 </template>
 
 <script>
 import DashBoardNavMenu from "@/components/navmenu/DashBoardNavMenu";
 import bug from "@/components/bug";
-import Banner from "@/components/Banner";
+import Banner from "@/components/base/Banner";
 
 export default {
   props:[

@@ -18,7 +18,7 @@ export default {
     }
   },
   methods: {
-    test(){
+    bugList(){
       this.axios({
         url: "/api/v1/bug/list",
         method: "get",
@@ -29,7 +29,7 @@ export default {
     }
   },
   mounted() {
-    this.test()
+    this.bugList()
   }
 };
 </script>

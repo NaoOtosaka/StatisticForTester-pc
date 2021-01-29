@@ -36,7 +36,7 @@
 </style>
 
 <script>
-import Banner from "@/components/Banner";
+import Banner from "@/components/base/Banner";
 import NavMenu from "@/components/base/NavMenu";
 
 export default {
@@ -91,27 +91,27 @@ export default {
         [
           {
             name: "项目图表",
-            routePath: "/dashboard",
+            routePath: "/chart/bug",
             icon: 'el-icon-pie-chart'
           },
           {
             name: "开发图表",
-            routePath: "/dashboard/manage",
+            routePath: "/chart/developer",
             icon: 'el-icon-pie-chart'
           },
           {
             name: "测试图表",
-            routePath: "/dashboard/manage",
+            routePath: "/chart/tester",
             icon: 'el-icon-pie-chart'
           },
-          {
-            name: "策划图表",
-            routePath: "/dashboard/manage",
-            icon: 'el-icon-pie-chart'
-          },
+          // {
+          //   name: "策划图表",
+          //   routePath: "/chart/planner",
+          //   icon: 'el-icon-pie-chart'
+          // },
           {
             name: "BUG图表",
-            routePath: "/data/bug",
+            routePath: "/chart/bug",
             icon: 'el-icon-pie-chart'
           },
         ],

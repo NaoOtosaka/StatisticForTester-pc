@@ -26,9 +26,9 @@
 </style>
 
 <script>
-import NavMenu from "../components/NavMenu";
+import NavMenu from "@/components/base/NavMenu";
 import bug from "@/components/bug";
-import Banner from "@/components/Banner";
+import Banner from "@/components/base/Banner";
 
 export default {
   components: {

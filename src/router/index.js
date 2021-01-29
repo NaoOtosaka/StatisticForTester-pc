@@ -51,8 +51,38 @@ const routes = [
   },
   {
     path: '/chart',
-    name: '图表',
-    component: () => import('../views/chart/index')
+    component: () => import('../views/chart/index'),
+    children: [
+      {
+        path:'/',
+        redirect:'tester'
+      },
+      // {
+      //   path: 'project',
+      //   name: '项目图表',
+      //   component: () => import('../views/chart/project')
+      // },
+      // {
+      //   path: 'developer',
+      //   name: '开发图表',
+      //   component: () => import('../views/chart/developer')
+      // },
+      {
+        path: 'tester',
+        name: '测试图表',
+        component: () => import('../views/chart/tester')
+      },
+      // {
+      //   path: 'planner',
+      //   name: '策划图表',
+      //   component: () => import('../views/chart/planner')
+      // },
+      // {
+      //   path: 'bug',
+      //   name: 'BUG图表',
+      //   component: () => import('../views/chart/bug')
+      // }
+    ]
   },
   {
     path: '/setting',

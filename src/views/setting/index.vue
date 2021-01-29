@@ -12,18 +12,10 @@
 </template>
 
 
-<style>
-.el-header {
-  background-color: #545c64;
-  color: #545c64;
-  line-height:60px;
-}
-</style>
-
 <script>
 import SettingNavMenu from "@/components/navmenu/SettingNavMenu";
 import bug from "@/components/bug";
-import Banner from "@/components/Banner";
+import Banner from "@/components/base/Banner";
 
 export default {
   props:[
