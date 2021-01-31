@@ -77,11 +77,11 @@ const routes = [
       //   name: '策划图表',
       //   component: () => import('../views/chart/planner')
       // },
-      // {
-      //   path: 'bug',
-      //   name: 'BUG图表',
-      //   component: () => import('../views/chart/bug')
-      // }
+      {
+        path: 'bug',
+        name: 'BUG图表',
+        component: () => import('../views/chart/bug')
+      }
     ]
   },
   {

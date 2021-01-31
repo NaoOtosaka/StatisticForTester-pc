@@ -1,6 +1,6 @@
 <template>
   <div class="Echarts">
-    <div id="main" style="width: 600px;height:400px;"></div>
+    <div id="main" style="width: auto;height:400px;"></div>
   </div>
 </template>
 
@@ -15,7 +15,7 @@ export default {
     }
   },
   methods: {
-    get_bug_count(){
+    getBugCount(){
       axios.all(
           [
               axios.get('/api/v1/tester/bug_count')
@@ -54,7 +54,8 @@ export default {
         series: [{
           name: '销量',
           type: 'bar',
-          data: this.count
+          data: this.count,
+          barWidth: 50
         }]
       };
       // 使用刚指定的配置项和数据显示图表。
@@ -62,7 +63,7 @@ export default {
     }
   },
   mounted() {
-    this.get_bug_count()
+    this.getBugCount()
   }
 }
 </script>

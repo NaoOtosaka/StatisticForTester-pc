@@ -1,16 +1,16 @@
 <!--仪表盘主框架-->
 <template>
   <div>
-    <BugCountWithTester/>
+    <BugCountWithProject/>
   </div>
 </template>
 
 <script>
-import BugCountWithTester from "@/components/chart/tester/BugCountWithTester";
+import BugCountWithProject from "@/components/chart/bug/BugCountWithProject";
 
 export default {
   components: {
-    BugCountWithTester,
+    BugCountWithProject,
   },
   data() {
     return {
