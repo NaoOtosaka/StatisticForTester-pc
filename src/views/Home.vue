@@ -7,10 +7,6 @@
         <el-aside width="auto">
           <NavMenu :isCollapse=navTag></NavMenu>
         </el-aside>
-<!--        <el-main>-->
-
-<!--        </el-main>-->
-
       </el-container>
       <bug :data="bug_data"/>
     </el-container>

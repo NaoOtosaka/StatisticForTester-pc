@@ -1,6 +1,6 @@
 <template>
   <div class="Echarts">
-    <div id="bugCount" style="width: auto;height:400px;"></div>
+    <div id="bugType" style="width: auto;height:400px;"></div>
   </div>
 </template>
 
@@ -10,15 +10,18 @@ import axios from "axios";
 export default {
   data() {
     return {
-      xAxis: [],
-      count: []
+      bugTypeData: []
     }
   },
   methods: {
     getBugCount(){
       axios.all(
           [
-              axios.get('/api/v1/tester/bug_count')
+            axios.get('/api/v1/tester/bug_type', {
+              params:{
+                testerId: 1
+              }
+            })
           ]
       ).then(res => {
             this.getData(res);
@@ -30,32 +33,27 @@ export default {
       // 循环读取接口数据
       console.log(res[0].data.data)
       for (let i=0;i<res[0].data.data.length;i++) {
-        this.xAxis.push(res[0].data.data[i][0])
-        this.count.push(res[0].data.data[i][1])
+        this.bugTypeData.push({value: res[0].data.data[i][1], name: res[0].data.data[i][0]})
       }
     },
     myEcharts() {
       // 基于准备好的dom，初始化echarts实例
-      let myChart = this.echarts.init(document.getElementById('bugCount'));
+      let myChart = this.echarts.init(document.getElementById('bugType'));
 
       // 指定图表的配置项和数据
       let option = {
         title: {
-          text: 'BUG数总览'
+          text: 'BUG类型统计'
         },
         tooltip: {},
         legend: {
           data: ['跟进BUG总数']
         },
-        xAxis: {
-          data: this.xAxis
-        },
-        yAxis: {},
         series: [{
-          name: '销量',
-          type: 'bar',
-          data: this.count,
-          barWidth: 50
+          name: '数量',
+          type: 'pie',
+          radius: '70%',
+          data: this.bugTypeData
         }]
       };
       // 使用刚指定的配置项和数据显示图表。

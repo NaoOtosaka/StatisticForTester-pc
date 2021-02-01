@@ -1,35 +1,34 @@
 <!--仪表盘主框架-->
 <template>
   <div>
-    <BugCountWithTester/>
+    <el-row>
+      <el-col :span="24"><div class="grid-content bg-purple-dark">
+        <BugCountWithTester/>
+      </div></el-col>
+    </el-row>
+    <hr style="opacity: 0.3">
+    <el-row>
+      <el-col :span="12"><div class="grid-content bg-purple">
+        <BugTypeCountWithTester/>
+      </div></el-col>
+      <el-col :span="12"><div class="grid-content bg-purple-light">
+        <BugCategoryCountWithTester/>
+      </div></el-col>
+    </el-row>
+
   </div>
 </template>
 
 <script>
 import BugCountWithTester from "@/components/chart/tester/BugCountWithTester";
+import BugTypeCountWithTester from "@/components/chart/tester/BugTypeCountWithTester";
+import BugCategoryCountWithTester from "@/components/chart/tester/BugCategoryCountWithTester";
 
 export default {
   components: {
     BugCountWithTester,
-  },
-  data() {
-    return {
-      // bug_data: []
-    }
-  },
-  methods: {
-    // bug_count(){
-    //   this.axios({
-    //     url: "/api/v1/tester/bug_count",
-    //     method: "get",
-    //     params: {}
-    //   }).then(res => {
-    //     this.bug_data = res.data.data
-    //   })
-    // }
-  },
-  mounted() {
-    // this.bug_count()
+    BugTypeCountWithTester,
+    BugCategoryCountWithTester
   }
 };
 </script>
