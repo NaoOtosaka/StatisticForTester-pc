@@ -8,6 +8,9 @@
 import axios from "axios";
 
 export default {
+  props: [
+    'testerId'
+  ],
   data() {
     return {
       bugTypeData: []
@@ -19,7 +22,7 @@ export default {
           [
             axios.get('/api/v1/tester/bug_type', {
               params:{
-                testerId: 1
+                testerId: this.testerId
               }
             })
           ]
@@ -30,6 +33,7 @@ export default {
       )
     },
     getData(res) {
+      this.bugTypeData = []
       // 循环读取接口数据
       console.log(res[0].data.data)
       for (let i=0;i<res[0].data.data.length;i++) {
@@ -53,7 +57,14 @@ export default {
           name: '数量',
           type: 'pie',
           radius: '70%',
-          data: this.bugTypeData
+          data: this.bugTypeData,
+          emphasis: {
+            itemStyle: {
+              shadowBlur: 10,
+              shadowOffsetX: 0,
+              shadowColor: 'rgba(0, 0, 0, 0.5)'
+            }
+          }
         }]
       };
       // 使用刚指定的配置项和数据显示图表。
@@ -62,6 +73,9 @@ export default {
   },
   mounted() {
     this.getBugCount()
+  },
+  watch: {
+    testerId: 'getBugCount'
   }
 }
 </script>

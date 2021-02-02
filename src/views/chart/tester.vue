@@ -8,11 +8,25 @@
     </el-row>
     <hr style="opacity: 0.3">
     <el-row>
+      <el-col :span="24">
+        <div style="float: left">
+          <el-select v-model="value" @change="sendTesterId(value)" clearable placeholder="全部">
+            <el-option
+                v-for="item in testerListData"
+                :key="item.testerId"
+                :label="item.testerName"
+                :value="item.testerId">
+            </el-option>
+          </el-select>
+        </div>
+      </el-col>
+    </el-row>
+    <el-row>
       <el-col :span="12"><div class="grid-content bg-purple">
-        <BugTypeCountWithTester/>
+        <BugTypeCountWithTester :testerId="value"/>
       </div></el-col>
       <el-col :span="12"><div class="grid-content bg-purple-light">
-        <BugCategoryCountWithTester/>
+        <BugCategoryCountWithTester :testerId="value"/>
       </div></el-col>
     </el-row>
 
@@ -29,6 +43,31 @@ export default {
     BugCountWithTester,
     BugTypeCountWithTester,
     BugCategoryCountWithTester
+  },
+  data() {
+    return {
+      testerListData: [],
+      value: ''
+    }
+  },
+  methods: {
+    testerList(){
+      this.axios({
+        url: "/api/v1/tester/list",
+        method: "get",
+        params: {}
+      }).then(res => {
+        this.testerListData = res.data.data
+        console.log(this.testerListData)
+      })
+    },
+    sendTesterId(value) {
+      console.log(value)
+      this.$forceUpdate()
+    }
+  },
+  mounted() {
+    this.testerList()
   }
 };
 </script>

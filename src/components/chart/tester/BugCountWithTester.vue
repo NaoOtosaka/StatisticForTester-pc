@@ -48,11 +48,64 @@ export default {
           data: ['跟进BUG总数']
         },
         xAxis: {
-          data: this.xAxis
+          data: this.xAxis,
+          axisLabel: {
+            inside: true,
+            textStyle: {
+              color: '#ffffff'
+            }
+          },
+          axisTick: {
+            show: false
+          },
+          axisLine: {
+            show: false
+          },
+          z: 10
         },
-        yAxis: {},
+        yAxis: {
+          axisLine: {
+            show: false
+          },
+          axisTick: {
+            show: false
+          },
+          axisLabel: {
+            textStyle: {
+              color: '#3E4FFC'
+            }
+          }
+        },
+        dataZoom: [
+          {
+            type: 'inside'
+          }
+        ],
         series: [{
-          name: '销量',
+          showBackground: true,
+          itemStyle: {
+            color: this.echarts.graphic.LinearGradient(
+                0, 0, 0, 1,
+                [
+                  {offset: 0, color: '#83bff6'},
+                  {offset: 0.5, color: '#188df0'},
+                  {offset: 1, color: '#188df0'}
+                ]
+            )
+          },
+          emphasis: {
+            itemStyle: {
+              color: this.echarts.graphic.LinearGradient(
+                  0, 0, 0, 1,
+                  [
+                    {offset: 0, color: '#2378f7'},
+                    {offset: 0.7, color: '#2378f7'},
+                    {offset: 1, color: '#3E4FFC'}
+                  ]
+              )
+            }
+          },
+          name: '跟进BUG数',
           type: 'bar',
           data: this.count,
           barWidth: 50
@@ -60,7 +113,7 @@ export default {
       };
       // 使用刚指定的配置项和数据显示图表。
       myChart.setOption(option);
-    }
+    },
   },
   mounted() {
     this.getBugCount()

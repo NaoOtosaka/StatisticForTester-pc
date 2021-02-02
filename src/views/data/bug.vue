@@ -1,7 +1,7 @@
 <!--仪表盘主框架-->
 <template>
   <div>
-    <BugList :data="bug_data"/>
+    <BugList :data="bugData"/>
   </div>
 </template>
 
@@ -14,7 +14,7 @@ export default {
   },
   data() {
     return {
-      bug_data: []
+      bugData: []
     }
   },
   methods: {
@@ -24,7 +24,7 @@ export default {
         method: "get",
         params: {}
       }).then(res => {
-        this.bug_data = res.data.data
+        this.bugData = res.data.data
       })
     }
   },
