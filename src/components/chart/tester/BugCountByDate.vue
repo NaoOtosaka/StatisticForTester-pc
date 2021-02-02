@@ -14,7 +14,8 @@ export default {
   data() {
     return {
       xAxis: [],
-      count: []
+      count: [],
+
     }
   },
   methods: {
@@ -28,10 +29,28 @@ export default {
             })
           ]
       ).then(res => {
-            this.getData(res);
+            console.log(res[0].data.data);
+            this.getData(this.initDateData(res[0].data.data));
             this.myEcharts();
           }
       )
+    },
+    initDateData(res) {
+      // 数据初始化
+      let year = 2021;
+      let date = +this.echarts.number.parseDate(year + '-01-01');
+      let end = +this.echarts.number.parseDate(year + '-02-31');
+      let dayTime = 3600 * 24 * 1000;
+      let temp = [];
+      for (let time = date; time <= end; time += dayTime) {
+        date = this.echarts.format.formatTime('yyyy-MM-dd', time)
+        if (res[date]) {
+          temp[date] = res[date]
+        }else {
+          temp[date] = 0;
+        }
+      }
+      return temp
     },
     getData(res) {
       // 数据初始化
@@ -39,20 +58,12 @@ export default {
       this.count = []
 
       // 循环读取接口数据
-      console.log(res[0].data.data)
-      for (let i=0;i<res[0].data.data.length;i++) {
-        this.xAxis.push(this.formatDate(res[0].data.data[i][0] * 1000))
-        this.count.push(res[0].data.data[i][1])
+      for (let item in res) {
+        if(res.hasOwnProperty(item)){
+          this.xAxis.push(item)
+          this.count.push(res[item])
+        }
       }
-    },
-    formatDate(time) {
-      // 时间戳标准化
-      let date = new Date(parseInt(time));
-      let year = date.getFullYear();
-      let mon = date.getMonth()+1;
-      let day = date.getDate();
-      let hour = date.getHours()
-      return year+'/'+mon+'/'+day+'-'+hour+':00';
     },
     myEcharts() {
       // 基于准备好的dom，初始化echarts实例
@@ -61,6 +72,9 @@ export default {
       if (myChart == null) {
         myChart = this.echarts.init(document.getElementById('bugCountByDate'))
       }
+
+      console.log(this.count)
+      console.log(this.xAxis)
 
       // 指定图表的配置项和数据
       let option = {
@@ -72,7 +86,7 @@ export default {
         },
         title: {
           left: 'center',
-          text: '异常新增趋势',
+          text: '跟进异常新增趋势',
         },
         toolbox: {
           feature: {

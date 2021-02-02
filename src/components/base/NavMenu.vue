@@ -1,6 +1,6 @@
 <template>
   <el-menu
-      default-active="0"
+      :default-active="defaultActive"
       class="el-menu-vertical-demo"
       @open="handleOpen"
       @close="handleClose"
@@ -28,6 +28,7 @@ export default {
   props: ["navList", "isCollapse"],
   data() {
     return {
+      defaultActive: '0'
     };
   },
   computed: {
@@ -46,6 +47,7 @@ export default {
   watch: {
     navList(val){
       console.log(this.navList)
+      this.defaultActive = '0'
       this.navList = val
     }
   }
