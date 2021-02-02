@@ -44,9 +44,6 @@ export default {
           text: 'BUG数总览'
         },
         tooltip: {},
-        legend: {
-          data: ['跟进BUG总数']
-        },
         xAxis: {
           data: this.xAxis,
           axisLabel: {
@@ -72,7 +69,7 @@ export default {
           },
           axisLabel: {
             textStyle: {
-              color: '#3E4FFC'
+              color: '#000000'
             }
           }
         },
@@ -120,7 +117,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>

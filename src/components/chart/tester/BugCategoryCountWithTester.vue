@@ -41,19 +41,20 @@ export default {
       }
     },
     myEcharts() {
+      let myChart = this.echarts.getInstanceByDom(document.getElementById('bugCategory'))
       // 基于准备好的dom，初始化echarts实例
-      let myChart = this.echarts.init(document.getElementById('bugCategory'));
+      if (myChart == null) {
+        myChart = this.echarts.init(document.getElementById('bugCategory'))
+      }
 
       // 指定图表的配置项和数据
       let option = {
         title: {
+          left: 'center',
           text: 'BUG分类统计',
         },
         tooltip: {
           trigger: 'item'
-        },
-        legend: {
-          data: ['跟进BUG总数']
         },
         series: [{
           name: '数量',
@@ -81,7 +82,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>

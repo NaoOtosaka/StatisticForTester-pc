@@ -29,7 +29,11 @@
         <BugCategoryCountWithTester :testerId="value"/>
       </div></el-col>
     </el-row>
-
+    <el-row>
+      <el-col :span="24"><div class="grid-content bg-purple">
+        <BugCountByDate :testerId="value"/>
+      </div></el-col>
+    </el-row>
   </div>
 </template>
 
@@ -37,12 +41,14 @@
 import BugCountWithTester from "@/components/chart/tester/BugCountWithTester";
 import BugTypeCountWithTester from "@/components/chart/tester/BugTypeCountWithTester";
 import BugCategoryCountWithTester from "@/components/chart/tester/BugCategoryCountWithTester";
+import BugCountByDate from "@/components/chart/tester/BugCountByDate";
 
 export default {
   components: {
     BugCountWithTester,
     BugTypeCountWithTester,
-    BugCategoryCountWithTester
+    BugCategoryCountWithTester,
+    BugCountByDate
   },
   data() {
     return {
