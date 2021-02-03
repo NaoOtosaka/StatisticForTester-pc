@@ -37,15 +37,26 @@ export default {
     },
     initDateData(res) {
       // 数据初始化
-      let year = 2021;
-      let date = +this.echarts.number.parseDate(year + '-01-01');
-      let end = +this.echarts.number.parseDate(year + '-02-31');
+      console.log(res['startDate'])
+      let startYear = res['startDate'].substr(0, 4);
+      let startMonth = res['startDate'].substr(5, 2);
+      let startDay = res['startDate'].substr(8, 2)
+
+      console.log(res['endDate'])
+      let endYear = res['endDate'].substr(0, 4);
+      let endMonth = res['endDate'].substr(5, 2);
+      let endDay = res['endDate'].substr(8, 2)
+
+      let date = +this.echarts.number.parseDate(startYear + '-' + startMonth + '-' + startDay);
+      let end = +this.echarts.number.parseDate(endYear + '-' + endMonth + '-' + endDay);
+
       let dayTime = 3600 * 24 * 1000;
       let temp = [];
+
       for (let time = date; time <= end; time += dayTime) {
         date = this.echarts.format.formatTime('yyyy-MM-dd', time)
-        if (res[date]) {
-          temp[date] = res[date]
+        if (res['data'][date]) {
+          temp[date] = res['data'][date]
         }else {
           temp[date] = 0;
         }

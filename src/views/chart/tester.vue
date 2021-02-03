@@ -22,11 +22,14 @@
       </el-col>
     </el-row>
     <el-row>
-      <el-col :span="12"><div class="grid-content bg-purple">
+      <el-col :span="8"><div class="grid-content bg-purple">
         <BugTypeCountWithTester :testerId="value"/>
       </div></el-col>
-      <el-col :span="12"><div class="grid-content bg-purple-light">
+      <el-col :span="8"><div class="grid-content bg-purple-light">
         <BugCategoryCountWithTester :testerId="value"/>
+      </div></el-col>
+      <el-col :span="8"><div class="grid-content bg-purple-light">
+        <BugCountByEnv :testerId="value"/>
       </div></el-col>
     </el-row>
     <el-row>
@@ -42,13 +45,15 @@ import BugCountWithTester from "@/components/chart/tester/BugCountWithTester";
 import BugTypeCountWithTester from "@/components/chart/tester/BugTypeCountWithTester";
 import BugCategoryCountWithTester from "@/components/chart/tester/BugCategoryCountWithTester";
 import BugCountByDate from "@/components/chart/tester/BugCountByDate";
+import BugCountByEnv from "@/components/chart/tester/BugCountByEnv";
 
 export default {
   components: {
     BugCountWithTester,
     BugTypeCountWithTester,
     BugCategoryCountWithTester,
-    BugCountByDate
+    BugCountByDate,
+    BugCountByEnv
   },
   data() {
     return {

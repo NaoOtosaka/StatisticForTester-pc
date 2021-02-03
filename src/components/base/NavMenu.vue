@@ -1,14 +1,15 @@
 <template>
   <el-menu
-      :default-active="defaultActive"
+      :default-active="$route.path"
       class="el-menu-vertical-demo"
       @open="handleOpen"
       @close="handleClose"
+      router
       :collapse="isCollapse">
     <el-menu-item
         v-for="(item, index) in navList" :key="index"
         @click="toUrl(item.routePath)"
-        :index="index.toString()">
+        :index="item.routePath">
       <i :class="item.icon"></i>
       <span slot="title">{{ item.name }}</span>
     </el-menu-item>
