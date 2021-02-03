@@ -1,21 +1,23 @@
 <template>
   <el-menu
-      :default-active="$route.path"
+      :default-active="navUrl"
       class="el-menu-vertical-demo"
       @open="handleOpen"
       @close="handleClose"
-      router
-      :collapse="isCollapse">
+      :collapse="isCollapse"
+      router>
     <el-menu-item
         v-for="(item, index) in navList" :key="index"
-        @click="toUrl(item.routePath)"
         :index="item.routePath">
-      <i :class="item.icon"></i>
-      <span slot="title">{{ item.name }}</span>
+      <template>
+        <i :class="item.icon"></i>
+        <span slot="title">{{ item.name }}</span>
+      </template>
     </el-menu-item>
   </el-menu>
 </template>
 
+<!--@click="toUrl(item.routePath)"-->
 
 <style>
 .el-menu-vertical-demo:not(.el-menu--collapse) {
@@ -29,6 +31,7 @@ export default {
   props: ["navList", "isCollapse"],
   data() {
     return {
+      navUrl:this.$route.path,
       defaultActive: '0'
     };
   },
@@ -36,6 +39,7 @@ export default {
   },
   methods: {
     toUrl(url){
+      console.log(url)
       this.$router.push(url)
     },
     handleOpen(key, keyPath) {
@@ -50,6 +54,13 @@ export default {
       console.log(this.navList)
       this.defaultActive = '0'
       this.navList = val
+    },
+    //监听路由变化
+    $route(val){
+      //路由如果变化则赋值给初始路由
+      console.log(this.navUrl)
+      this.navUrl = val.path
+      console.log(this.navUrl)
     }
   }
 }

@@ -37,22 +37,24 @@ export default {
     },
     initDateData(res) {
       // 数据初始化
-      console.log(res['startDate'])
+      // console.log(res['startDate'])
       let startYear = res['startDate'].substr(0, 4);
       let startMonth = res['startDate'].substr(5, 2);
       let startDay = res['startDate'].substr(8, 2)
 
-      console.log(res['endDate'])
+      // console.log(res['endDate'])
       let endYear = res['endDate'].substr(0, 4);
       let endMonth = res['endDate'].substr(5, 2);
       let endDay = res['endDate'].substr(8, 2)
 
+      // 设置起止日期
       let date = +this.echarts.number.parseDate(startYear + '-' + startMonth + '-' + startDay);
       let end = +this.echarts.number.parseDate(endYear + '-' + endMonth + '-' + endDay);
 
       let dayTime = 3600 * 24 * 1000;
       let temp = [];
 
+      // 数据匹配
       for (let time = date; time <= end; time += dayTime) {
         date = this.echarts.format.formatTime('yyyy-MM-dd', time)
         if (res['data'][date]) {
@@ -84,8 +86,8 @@ export default {
         myChart = this.echarts.init(document.getElementById('bugCountByDate'))
       }
 
-      console.log(this.count)
-      console.log(this.xAxis)
+      // console.log(this.count)
+      // console.log(this.xAxis)
 
       // 指定图表的配置项和数据
       let option = {
@@ -97,7 +99,7 @@ export default {
         },
         title: {
           left: 'center',
-          text: '跟进异常新增趋势',
+          text: '异常新增趋势',
         },
         toolbox: {
           feature: {

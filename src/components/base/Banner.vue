@@ -1,11 +1,12 @@
 <template>
     <el-menu
-        default-active="0"
+        :default-active="bannerUrl"
         class="el-menu-demo"
         mode="horizontal"
         background-color="#545c64"
         text-color="#fff"
-        active-text-color="#ffd04b">
+        active-text-color="#ffd04b"
+        router>
       <el-menu-item @click="changeNavStatus">
         <el-button size="mini" class="el-icon-arrow-left" v-if="!isCollapse" type="info" circle></el-button>
         <el-button size="mini" class="el-icon-arrow-right" v-else type="info" circle></el-button>
@@ -13,8 +14,8 @@
       <el-menu-item
           v-for="(item, key) in bannerList"
           :key="key"
-          @click="changeNavType(key);toUrl(item.routePath)"
-          :index='key.toString()'>
+          @click="changeNavType(key);"
+          :index='item.routePath'>
         {{ item.name }}
       </el-menu-item>
     </el-menu>
@@ -26,6 +27,7 @@ export default {
     return {
       isCollapse: false,
       activeIndex: '1',
+      bannerUrl:this.$route.path,
       bannerList: [
         {
           name: '仪表盘',
@@ -33,11 +35,11 @@ export default {
         },
         {
           name: '数据',
-          routePath: '/data'
+          routePath: '/data/project'
         },
         {
           name: '图表',
-          routePath: '/chart'
+          routePath: '/chart/bug'
         },
         {
           name: '设置',
@@ -58,7 +60,12 @@ export default {
       this.activeIndex = index
       this.$emit('sendNavType', this.activeIndex)
     }
+  },
+  watch: {
+    $route(val){
+      //路由如果变化则赋值给初始路由
+      this.bannerUrl = val.path
+    }
   }
-
 }
 </script>

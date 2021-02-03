@@ -134,6 +134,12 @@ export default {
       console.log(this.activeIndex)
       return navType
     }
+  },
+  watch: {
+    $route(val){
+      //路由如果变化则赋值给初始路由
+      this.bannerUrl = val.path
+    }
   }
 };
 </script>
