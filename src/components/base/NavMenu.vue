@@ -7,7 +7,7 @@
       :collapse="isCollapse"
       router>
     <el-menu-item
-        v-for="(item, index) in navList" :key="index"
+        v-for="(item, index) in navList" :key="item.routePath"
         :index="item.routePath">
       <template>
         <i :class="item.icon"></i>
@@ -31,8 +31,7 @@ export default {
   props: ["navList", "isCollapse"],
   data() {
     return {
-      navUrl:this.$route.path,
-      defaultActive: '0'
+      navUrl:this.$route.fullPath,
     };
   },
   computed: {
@@ -51,16 +50,16 @@ export default {
   },
   watch: {
     navList(val){
-      console.log(this.navList)
-      this.defaultActive = '0'
       this.navList = val
     },
     //监听路由变化
     $route(val){
       //路由如果变化则赋值给初始路由
-      console.log(this.navUrl)
-      this.navUrl = val.path
-      console.log(this.navUrl)
+      for (let i=0;i<this.navList.length;i++){
+        if (val.fullPath.indexOf(this.navList[i]["routePath"]) !== -1){
+          this.navUrl = this.navList[i]["routePath"]
+        }
+      }
     }
   }
 }

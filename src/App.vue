@@ -55,11 +55,11 @@ export default {
             routePath: "/dashboard",
             icon: 'el-icon-monitor'
           },
-          {
-            name: "管理",
-            routePath: "/dashboard/manage",
-            icon: 'el-icon-s-operation'
-          }
+          // {
+          //   name: "管理",
+          //   routePath: "/dashboard/manage",
+          //   icon: 'el-icon-s-operation'
+          // }
         ],
         [
           {
@@ -89,16 +89,16 @@ export default {
           },
         ],
         [
-          {
-            name: "项目图表",
-            routePath: "/chart/bug",
-            icon: 'el-icon-pie-chart'
-          },
-          {
-            name: "开发图表",
-            routePath: "/chart/developer",
-            icon: 'el-icon-pie-chart'
-          },
+          // {
+          //   name: "项目图表",
+          //   routePath: "/chart/project",
+          //   icon: 'el-icon-pie-chart'
+          // },
+          // {
+          //   name: "开发图表",
+          //   routePath: "/chart/developer",
+          //   icon: 'el-icon-pie-chart'
+          // },
           {
             name: "测试图表",
             routePath: "/chart/tester",
@@ -115,13 +115,13 @@ export default {
             icon: 'el-icon-pie-chart'
           },
         ],
-        [
-          {
-            name: "全局",
-            routePath: "/dashboard",
-            icon: 'el-icon-setting'
-          }
-        ],
+        // [
+        //   {
+        //     name: "全局",
+        //     routePath: "/dashboard",
+        //     icon: 'el-icon-setting'
+        //   }
+        // ],
       ]
     }
   },
@@ -138,7 +138,7 @@ export default {
   watch: {
     $route(val){
       //路由如果变化则赋值给初始路由
-      this.bannerUrl = val.path
+      this.bannerUrl = val.fullPath
     }
   }
 };

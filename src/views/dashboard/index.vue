@@ -1,6 +1,9 @@
 <!--仪表盘主框架-->
 <template>
-  <bug :data="bug_data"/>
+  <div>
+    TEST
+  </div>
+<!--  <bug :data="bug_data"/>-->
 </template>
 
 <script>

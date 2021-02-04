@@ -7,7 +7,8 @@ const routes = [
   {
     path: '/',
     name: '仪表盘',
-    component: () => import('../views/dashboard/index')
+    // component: () => import('../views/dashboard/index'),
+    redirect: '/dashboard'
   },
   {
     path: '/dashboard',
@@ -55,7 +56,7 @@ const routes = [
     children: [
       {
         path:'/',
-        redirect:'bug'
+        redirect:'tester'
       },
       // {
       //   path: 'project',

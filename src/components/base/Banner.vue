@@ -35,16 +35,16 @@ export default {
         },
         {
           name: '数据',
-          routePath: '/data/project'
+          routePath: '/data'
         },
         {
           name: '图表',
-          routePath: '/chart/bug'
+          routePath: '/chart'
         },
-        {
-          name: '设置',
-          routePath: '/setting'
-        }
+        // {
+        //   name: '设置',
+        //   routePath: '/setting'
+        // }
       ]
     }
   },
@@ -63,8 +63,11 @@ export default {
   },
   watch: {
     $route(val){
-      //路由如果变化则赋值给初始路由
-      this.bannerUrl = val.path
+      for (let i = 0;i<this.bannerList.length;i++){
+        if (val.fullPath.indexOf(this.bannerList[i]["routePath"]) === 0){
+          this.bannerUrl = this.bannerList[i]["routePath"]
+        }
+      }
     }
   }
 }
