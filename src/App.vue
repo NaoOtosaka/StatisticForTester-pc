@@ -52,7 +52,7 @@ export default {
         [
           {
             name: "总览",
-            routePath: "/dashboard/",
+            routePath: "/dashboard",
             icon: 'el-icon-monitor'
           },
           // {
@@ -89,11 +89,11 @@ export default {
           },
         ],
         [
-          // {
-          //   name: "项目图表",
-          //   routePath: "/chart/project",
-          //   icon: 'el-icon-pie-chart'
-          // },
+          {
+            name: "项目图表",
+            routePath: "/chart/project",
+            icon: 'el-icon-pie-chart'
+          },
           // {
           //   name: "开发图表",
           //   routePath: "/chart/developer",

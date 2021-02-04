@@ -8,12 +8,11 @@
         ref="table"
         stripe>
       <el-table-column v-for="(item,index) in reversedMessage" :key="index"
-          :prop="item.type"
-          :label="item.name"
-          :sortable="item.sortable"
-          :width="item.column"
-          show-overflow-tooltip
-      >
+                       :prop="item.type"
+                       :label="item.name"
+                       :sortable="item.sortable"
+                       :width="item.column"
+                       show-overflow-tooltip>
       </el-table-column>
     </el-table>
 </template>
@@ -24,7 +23,8 @@ export default {
   data() {
     return {
       dataColumn: [],
-      tableHeight: 50 //表格高度默认初始值
+      tableHeight: 50, //表格高度默认初始值
+      projectData: []
     }
   },
   computed: {
@@ -87,7 +87,7 @@ export default {
             type: 'projectName',
             name: '项目名',
             sortable: true,
-            column: "150px"
+            column: "150px",
           })
         }
         if (item.hasOwnProperty('testerName')) {
@@ -106,8 +106,6 @@ export default {
             column: "150px"
           })
         }
-
-
         return temp
       }
       else{

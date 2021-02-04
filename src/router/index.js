@@ -56,13 +56,13 @@ const routes = [
     children: [
       {
         path:'/',
-        redirect:'tester'
+        redirect:'project'
       },
-      // {
-      //   path: 'project',
-      //   name: '项目图表',
-      //   component: () => import('../views/chart/project')
-      // },
+      {
+        path: 'project',
+        name: '项目图表',
+        component: () => import('../views/chart/project')
+      },
       // {
       //   path: 'developer',
       //   name: '开发图表',

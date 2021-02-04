@@ -6,15 +6,33 @@
         <BugCountByDate :testerId="value"/>
       </div></el-col>
     </el-row>
+    <el-row>
+      <el-col :span="8"><div class="grid-content bg-purple">
+        <BugTypeCountWithTester/>
+      </div></el-col>
+      <el-col :span="8"><div class="grid-content bg-purple-light">
+        <BugCategoryCountWithTester/>
+      </div></el-col>
+      <el-col :span="8"><div class="grid-content bg-purple-light">
+        <BugCountByEnv/>
+      </div></el-col>
+    </el-row>
   </div>
 </template>
 
 <script>
 import BugCountByDate from "@/components/chart/tester/BugCountByDate";
+import BugTypeCountWithTester from "@/components/chart/tester/BugTypeCountWithTester";
+import BugCategoryCountWithTester from "@/components/chart/tester/BugCategoryCountWithTester";
+import BugCountByEnv from "@/components/chart/tester/BugCountByEnv";
+
 
 export default {
   components: {
     BugCountByDate,
+    BugTypeCountWithTester,
+    BugCategoryCountWithTester,
+    BugCountByEnv
   },
   data() {
     return {
