@@ -1,7 +1,7 @@
 <!--仪表盘主框架-->
 <template>
   <div>
-    TEST
+    这是一个空的首页
   </div>
 <!--  <bug :data="bug_data"/>-->
 </template>

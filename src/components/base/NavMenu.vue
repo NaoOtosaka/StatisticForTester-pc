@@ -7,7 +7,7 @@
       :collapse="isCollapse"
       router>
     <el-menu-item
-        v-for="(item, index) in navList" :key="item.routePath"
+        v-for="item in navList" :key="item.routePath"
         :index="item.routePath">
       <template>
         <i :class="item.icon"></i>
@@ -46,7 +46,17 @@ export default {
     },
     handleClose(key, keyPath) {
       console.log(key, keyPath);
+    },
+    setNavActive() {
+      for (let i=0;i<this.navList.length;i++){
+        if (this.$route.fullPath.indexOf(this.navList[i]["routePath"]) !== -1){
+          this.navUrl = this.navList[i]["routePath"]
+        }
+      }
     }
+  },
+  mounted() {
+    this.setNavActive()
   },
   watch: {
     navList(val){

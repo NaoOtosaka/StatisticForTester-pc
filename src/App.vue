@@ -52,7 +52,7 @@ export default {
         [
           {
             name: "总览",
-            routePath: "/dashboard",
+            routePath: "/dashboard/",
             icon: 'el-icon-monitor'
           },
           // {
@@ -138,7 +138,12 @@ export default {
   watch: {
     $route(val){
       //路由如果变化则赋值给初始路由
-      this.bannerUrl = val.fullPath
+      for (let i=0;i<this.navList.length;i++){
+        let tag = this.navList[i][0]["routePath"].indexOf('/', 1)
+        if (val.fullPath.indexOf(this.navList[i][0]["routePath"].substr(0, tag)) !== -1){
+          this.activeIndex = i
+        }
+      }
     }
   }
 };

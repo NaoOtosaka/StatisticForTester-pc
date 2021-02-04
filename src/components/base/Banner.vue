@@ -59,7 +59,20 @@ export default {
     changeNavType(index) {
       this.activeIndex = index
       this.$emit('sendNavType', this.activeIndex)
+    },
+    setBannerActive() {
+      for (let i = 0;i<this.bannerList.length;i++){
+        if (this.$route.fullPath.indexOf(this.bannerList[i]["routePath"]) === 0){
+          this.bannerUrl = this.bannerList[i]["routePath"]
+          this.activeIndex = i + 1
+        }
+      }
     }
+  },
+  mounted() {
+    this.setBannerActive()
+    console.log(this.activeIndex)
+    // this.changeNavType()
   },
   watch: {
     $route(val){
