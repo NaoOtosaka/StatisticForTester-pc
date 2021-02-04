@@ -66,6 +66,22 @@ export default {
             sortable: true
           })
         }
+        if (item.hasOwnProperty('bugCategory')) {
+          temp.push({
+            type: 'bugCategory',
+            name: '类型',
+            sortable: true,
+            column: "150px"
+          })
+        }
+        if (item.hasOwnProperty('bugType')) {
+          temp.push({
+            type: 'bugType',
+            name: '跟踪标签',
+            sortable: true,
+            column: "150px"
+          })
+        }
         if (item.hasOwnProperty('projectName')) {
           temp.push({
             type: 'projectName',
@@ -90,6 +106,7 @@ export default {
             column: "150px"
           })
         }
+
 
         return temp
       }

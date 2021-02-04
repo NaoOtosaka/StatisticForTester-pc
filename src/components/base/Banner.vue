@@ -66,6 +66,7 @@ export default {
       for (let i = 0;i<this.bannerList.length;i++){
         if (val.fullPath.indexOf(this.bannerList[i]["routePath"]) === 0){
           this.bannerUrl = this.bannerList[i]["routePath"]
+          this.activeIndex = i + 1
         }
       }
     }
