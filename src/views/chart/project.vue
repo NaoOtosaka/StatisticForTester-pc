@@ -1,11 +1,6 @@
 <!--仪表盘主框架-->
 <template>
   <div>
-<!--    <el-row>-->
-<!--      <el-col :span="24"><div class="grid-content bg-purple">-->
-<!--        <BugCountByDate :testerId="value"/>-->
-<!--      </div></el-col>-->
-<!--    </el-row>-->
     <el-row>
       <el-col :span="24">
         <div style="float: left">
@@ -21,21 +16,34 @@
       </el-col>
     </el-row>
     <el-row>
-      <el-col :span="24">
-        <BugTypeCountWithProject :project-id="value"/>
+      <el-col :span="12">
+        <BugTypeCountWithProject :projectId="value"/>
+      </el-col>
+      <el-col :span="12">
+        <BugCategoryCountWithProject :projectId="value"/>
+      </el-col>
+    </el-row>
+    <el-row>
+      <el-col :span="12">
+        <BugDeveloperCountWithProject :projectId="value"/>
+      </el-col>
+      <el-col :span="12">
+        <BugCategoryCountWithProject :projectId="value"/>
       </el-col>
     </el-row>
   </div>
 </template>
 
 <script>
-import BugCountByDate from "@/components/chart/tester/BugCountByDate";
 import BugTypeCountWithProject from "@/components/chart/project/BugTypeCountWithProject";
+import BugCategoryCountWithProject from "@/components/chart/bug/BugCategoryCountWithProject";
+import BugDeveloperCountWithProject from "@/components/chart/bug/BugDeveloperCountWithProject";
 
 export default {
   components: {
-    BugCountByDate,
-    BugTypeCountWithProject
+    BugTypeCountWithProject,
+    BugCategoryCountWithProject,
+    BugDeveloperCountWithProject
   },
   data() {
     return {
