@@ -13,7 +13,7 @@ export default {
   ],
   data() {
     return {
-      bugTypeData: [],
+      bugCategoryData: [],
     }
   },
   methods: {
@@ -34,10 +34,10 @@ export default {
     },
     getData(res) {
       // 循环读取接口数据
-      this.bugTypeData = []
+      this.bugCategoryData=[]
       console.log(res[0].data.data)
       for (let i=0;i<res[0].data.data.length;i++) {
-        this.bugTypeData.push({value: res[0].data.data[i][0], name: res[0].data.data[i][1]})
+        this.bugCategoryData.push({value: res[0].data.data[i][0], name: res[0].data.data[i][1]})
       }
     },
     myEcharts() {
@@ -60,7 +60,7 @@ export default {
           name: '数量',
           type: 'pie',
           radius: '70%',
-          data: this.bugTypeData,
+          data: this.bugCategoryData,
           emphasis: {
             itemStyle: {
               shadowBlur: 10,

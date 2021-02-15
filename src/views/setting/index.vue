@@ -3,7 +3,6 @@
   <el-container>
     <el-aside width="auto">
       <!--        纵向导航-->
-      <SettingNavMenu :isCollapse="navTag"></SettingNavMenu>
     </el-aside>
     <el-main>
       <bug :data="bug_data"/>
@@ -13,7 +12,6 @@
 
 
 <script>
-import SettingNavMenu from "@/components/navmenu/SettingNavMenu";
 import bug from "@/components/bug";
 import Banner from "@/components/base/Banner";
 
@@ -22,7 +20,6 @@ export default {
     "navTag"
   ],
   components: {
-    SettingNavMenu,
     bug,
     Banner
   },

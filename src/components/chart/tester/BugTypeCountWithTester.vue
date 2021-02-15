@@ -33,7 +33,7 @@ export default {
       )
     },
     getData(res) {
-      this.bugTypeData = []
+      this.bugTypeData=[]
       // 循环读取接口数据
       console.log(res[0].data.data)
       for (let i=0;i<res[0].data.data.length;i++) {

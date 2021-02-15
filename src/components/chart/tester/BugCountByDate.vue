@@ -15,7 +15,6 @@ export default {
     return {
       xAxis: [],
       count: [],
-
     }
   },
   methods: {
@@ -85,9 +84,6 @@ export default {
       if (myChart == null) {
         myChart = this.echarts.init(document.getElementById('bugCountByDate'))
       }
-
-      // console.log(this.count)
-      // console.log(this.xAxis)
 
       // 指定图表的配置项和数据
       let option = {

@@ -37,10 +37,6 @@ export default {
   computed: {
   },
   methods: {
-    toUrl(url){
-      console.log(url)
-      this.$router.push(url)
-    },
     handleOpen(key, keyPath) {
       console.log(key, keyPath);
     },

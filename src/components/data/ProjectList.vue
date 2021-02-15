@@ -16,6 +16,14 @@
         show-overflow-tooltip
     >
     </el-table-column>
+    <el-table-column
+        label="操作"
+        width="100">
+      <template slot-scope="scope">
+        <el-button type="text" size="small" @click="toInfoUrl(scope.row.projectId)">详情</el-button>
+        <el-button type="text" size="small">编辑</el-button>
+      </template>
+    </el-table-column>
   </el-table>
 </template>
 
@@ -60,12 +68,17 @@ export default {
             sortable: false
           })
         }
-
         return temp
       }
       else{
         return false
       }
+    }
+  },
+  methods: {
+    toInfoUrl(projectId){
+      // console.log(projectId)
+      this.$router.push({path:'/data/project/info', query:{projectId: projectId}})
     }
   },
   mounted:function(){

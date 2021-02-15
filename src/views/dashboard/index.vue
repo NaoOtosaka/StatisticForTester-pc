@@ -7,7 +7,6 @@
 </template>
 
 <script>
-import DashBoardNavMenu from "@/components/navmenu/DashBoardNavMenu";
 import bug from "@/components/bug";
 import Banner from "@/components/base/Banner";
 
@@ -16,7 +15,6 @@ export default {
       "navTag"
   ],
   components: {
-    DashBoardNavMenu,
     bug,
     Banner
   },

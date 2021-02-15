@@ -33,13 +33,12 @@ export default {
       )
     },
     getData(res) {
-      this.bugEnvData = []
+      this.bugEnvData=[]
       // 循环读取接口数据
       console.log(res[0].data.data)
       for (let i=0;i<res[0].data.data.length;i++) {
         this.bugEnvData.push({value: res[0].data.data[i][1], name: res[0].data.data[i][0]})
       }
-      console.log(this.bugEnvData)
     },
     myEcharts() {
       let myChart = this.echarts.getInstanceByDom(document.getElementById('bugEnv'))

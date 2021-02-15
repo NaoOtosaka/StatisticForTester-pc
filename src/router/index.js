@@ -26,7 +26,12 @@ const routes = [
       {
         path: 'project',
         name: '项目数据表',
-        component: () => import('../views/data/project')
+        component: () => import('../views/data/project'),
+      },
+      {
+        path: 'project/info',
+        name: '项目数据表',
+        component: () => import('../views/data/info/project'),
       },
       {
         path: 'developer',
