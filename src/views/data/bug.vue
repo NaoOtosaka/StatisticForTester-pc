@@ -1,7 +1,7 @@
 <!--仪表盘主框架-->
 <template>
   <div>
-    <BugList :data="bugData"/>
+    <BugList :bugData="bugData"/>
   </div>
 </template>
 

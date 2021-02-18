@@ -1,9 +1,8 @@
 <template>
     <el-table
-        :data="data"
+        :data="bugData"
         border
         width="100%"
-        :height="tableHeight"
         :default-sort = "{order: 'descending'}"
         ref="table"
         stripe>
@@ -15,20 +14,20 @@
                        show-overflow-tooltip
       >
       </el-table-column>
-      <el-table-column
-          label="操作"
-          width="100">
-        <template slot-scope="scope">
-          <el-button type="text" size="small">查看</el-button>
-          <el-button type="text" size="small">编辑</el-button>
-        </template>
-      </el-table-column>
+<!--      <el-table-column-->
+<!--          label="操作"-->
+<!--          width="100">-->
+<!--        <template slot-scope="scope">-->
+<!--          <el-button type="text" size="small">查看</el-button>-->
+<!--          <el-button type="text" size="small">编辑</el-button>-->
+<!--        </template>-->
+<!--      </el-table-column>-->
     </el-table>
 </template>
 
 <script>
 export default {
-  props: ["data"],
+  props: ["bugData"],
   data() {
     return {
       dataColumn: [],
@@ -38,85 +37,86 @@ export default {
   computed: {
     // 计算属性的 getter
     reversedMessage: function () {
-      if(this.data.length > 0){
-        let item = this.data[0]
-        console.log(item)
-        let temp = []
+      if (this.bugData) {
+        if (this.bugData.length > 0) {
+          let item = this.bugData[0]
+          console.log(item)
+          let temp = []
 
-        if (item.hasOwnProperty('bugId')) {
-          // console.log(1)
-          temp.push({
-            type: 'bugId',
-            name: 'ID',
-            sortable: true,
-            column: "150px"
-          })
+          if (item.hasOwnProperty('bugId')) {
+            // console.log(1)
+            temp.push({
+              type: 'bugId',
+              name: 'ID',
+              sortable: true,
+              column: "150px"
+            })
+          }
+          if (item.hasOwnProperty('kbId')) {
+            temp.push({
+              type: 'kbId',
+              name: '看板ID',
+              sortable: false,
+              column: "150px"
+            })
+          }
+          if (item.hasOwnProperty('bugTitle')) {
+            temp.push({
+              type: 'bugTitle',
+              name: '主题',
+              sortable: false
+            })
+          }
+          if (item.hasOwnProperty('bugModel')) {
+            temp.push({
+              type: 'bugModel',
+              name: '模块',
+              sortable: true
+            })
+          }
+          if (item.hasOwnProperty('bugCategory')) {
+            temp.push({
+              type: 'bugCategory',
+              name: '类型',
+              sortable: true,
+              column: "150px"
+            })
+          }
+          if (item.hasOwnProperty('bugType')) {
+            temp.push({
+              type: 'bugType',
+              name: '跟踪标签',
+              sortable: true,
+              column: "150px"
+            })
+          }
+          if (item.hasOwnProperty('projectName')) {
+            temp.push({
+              type: 'projectName',
+              name: '项目名',
+              sortable: true,
+              column: "150px",
+            })
+          }
+          if (item.hasOwnProperty('testerName')) {
+            temp.push({
+              type: 'testerName',
+              name: 'QA',
+              sortable: true,
+              column: "150px"
+            })
+          }
+          if (item.hasOwnProperty('developerName')) {
+            temp.push({
+              type: 'developerName',
+              name: '开发',
+              sortable: true,
+              column: "150px"
+            })
+          }
+          return temp
         }
-        if (item.hasOwnProperty('kbId')) {
-          temp.push({
-            type: 'kbId',
-            name: '看板ID',
-            sortable: false,
-            column: "150px"
-          })
-        }
-        if (item.hasOwnProperty('bugTitle')) {
-          temp.push({
-            type: 'bugTitle',
-            name: '主题',
-            sortable: false
-          })
-        }
-        if (item.hasOwnProperty('bugModel')) {
-          temp.push({
-            type: 'bugModel',
-            name: '模块',
-            sortable: true
-          })
-        }
-        if (item.hasOwnProperty('bugCategory')) {
-          temp.push({
-            type: 'bugCategory',
-            name: '类型',
-            sortable: true,
-            column: "150px"
-          })
-        }
-        if (item.hasOwnProperty('bugType')) {
-          temp.push({
-            type: 'bugType',
-            name: '跟踪标签',
-            sortable: true,
-            column: "150px"
-          })
-        }
-        if (item.hasOwnProperty('projectName')) {
-          temp.push({
-            type: 'projectName',
-            name: '项目名',
-            sortable: true,
-            column: "150px",
-          })
-        }
-        if (item.hasOwnProperty('testerName')) {
-          temp.push({
-            type: 'testerName',
-            name: 'QA',
-            sortable: true,
-            column: "150px"
-          })
-        }
-        if (item.hasOwnProperty('developerName')) {
-          temp.push({
-            type: 'developerName',
-            name: '开发',
-            sortable: true,
-            column: "150px"
-          })
-        }
-        return temp
-      }
-      else{
+      } else {
         return false
       }
     }
