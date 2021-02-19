@@ -2,6 +2,8 @@
 <template>
   <div>
     <el-row>
+      <el-page-header @back="goBack" content="项目详情">
+      </el-page-header>
       <h2>
         项目信息总览
       </h2>
@@ -80,6 +82,9 @@ export default {
       // }).then(res => {
       //   this.projectData = res.data.data
       // })
+    },
+    goBack() {
+      this.$router.go(-1)
     }
   },
   mounted() {
