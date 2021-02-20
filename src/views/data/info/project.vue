@@ -24,7 +24,7 @@
     <el-row>
       <el-col :span="24">
         <h2>
-          阶段BUG统计
+          阶段BUG汇总
         </h2>
         <br>
         <PhaseList :phaseList="this.projectData['projectPhase']"/>
@@ -64,24 +64,15 @@ export default {
   },
   methods: {
     projectInfo(){
-      axios.all(
-          [
-            axios.get('/api/v1/project', {
-              params:{
-                projectId: this.$route.query.projectId
-              }
-            })
-          ]
-      ).then(res => {
-            this.projectData = res[0]['data']['data']
+      this.axios({
+        url: "/api/v1/project",
+        method: "get",
+        params: {
+          projectId: this.$route.query.projectId
+        }
+      }).then(res => {
+        this.projectData = res.data.data
       })
-      // this.axios({
-      //   url: "/api/v1/project",
-      //   method: "get",
-      //   params: {projectId: this.$route.query.projectId}
-      // }).then(res => {
-      //   this.projectData = res.data.data
-      // })
     },
     goBack() {
       this.$router.go(-1)
