@@ -1,16 +1,19 @@
 <!--仪表盘主框架-->
 <template>
   <div>
+    <Tabs />
     <ProjectList :data="bug_data"/>
   </div>
 </template>
 
 <script>
 import ProjectList from "@/components/data/ProjectList";
+import Tabs from "@/components/base/Tabs";
 
 export default {
   components: {
     ProjectList,
+    Tabs
   },
   data() {
     return {
