@@ -14,7 +14,6 @@
         <el-form-item label="对应策划">
           <el-select
               style="width: 100%"
-              clearable
               v-model="projectData.planner"
               placeholder="请选择策划"
               @change="updateProjectInfo(projectData.projectId, projectData.projectName, projectData.planner)">
