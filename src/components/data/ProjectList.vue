@@ -60,6 +60,14 @@ export default {
             sortable: false,
           })
         }
+        if (item.hasOwnProperty('category')) {
+          temp.push({
+            type: 'category',
+            name: '所属项目',
+            column: "350px",
+            sortable: false
+          })
+        }
         if (item.hasOwnProperty('planner')) {
           temp.push({
             type: 'planner',

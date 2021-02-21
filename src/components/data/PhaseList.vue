@@ -6,7 +6,7 @@
       <template slot="title">
         <span style="font-size: medium">
           <b style="text-align: left">
-          {{ item.name }}
+          {{ item.name }}({{ item.count }})
           </b>
         </span>
       </template>
@@ -30,7 +30,8 @@ export default {
   },
   data() {
     return {
-      bugData: {}
+      bugData: {},
+      bugCount: {},
     };
   },
   methods: {
@@ -67,9 +68,10 @@ export default {
             // console.log(temp)
             temp.forEach((item, index) => {
               this.bugData[req_num[index]] = item['data']['data']
+              this.bugCount[req_num[index]] = item['data']['data'].length
             })
-            console.log(this.phaseList)
-            console.log(this.bugData[this.phaseList[0]['phaseId']])
+            // console.log(this.phaseList)
+            // console.log(this.bugData[this.phaseList[0]['phaseId']])
         this.$forceUpdate()
           })
       )
