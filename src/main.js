@@ -16,9 +16,9 @@ Vue.prototype.echarts = echarts
 // axios全局设置
 // debug
 // axios.defaults.baseURL = 'http://10.219.152.171:9222';
-axios.defaults.baseURL = 'http://localhost:9222';
+// axios.defaults.baseURL = 'http://localhost:9222';
 // prod
-// axios.defaults.baseURL = 'http://10.219.152.253:9223';
+axios.defaults.baseURL = 'http://10.219.152.38:9222';
 
 axios.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
 axios.defaults.timeout = 10000;

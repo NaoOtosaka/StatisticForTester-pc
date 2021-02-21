@@ -1,6 +1,6 @@
 <template>
   <div class="Echarts">
-    <div id="bugType" style="width: auto;height:400px;"></div>
+    <div id="bugType" style="width: 100%;height:400px;"></div>
   </div>
 </template>
 
@@ -13,7 +13,8 @@ export default {
   ],
   data() {
     return {
-      bugTypeData: []
+      bugTypeData: [],
+      myChart: {},
     }
   },
   methods: {
@@ -41,10 +42,10 @@ export default {
       }
     },
     myEcharts() {
-      let myChart = this.echarts.getInstanceByDom(document.getElementById('bugType'))
+      this.myChart = this.echarts.getInstanceByDom(document.getElementById('bugType'))
       // 基于准备好的dom，初始化echarts实例
-      if (myChart == null) {
-        myChart = this.echarts.init(document.getElementById('bugType'))
+      if (this.myChart == null) {
+        this.myChart = this.echarts.init(document.getElementById('bugType'))
       }
 
       // 指定图表的配置项和数据
@@ -69,7 +70,7 @@ export default {
         }]
       };
       // 使用刚指定的配置项和数据显示图表。
-      myChart.setOption(option);
+      this.myChart.setOption(option);
     }
   },
   mounted() {

@@ -8,16 +8,16 @@
         项目信息总览
       </h2>
       <br>
-      <el-col :span="5" :offset="1">
+      <el-col :xs="5" :sm="5" :md="5" :lg="5" :xl="5" :offset="1">
         <ProjectInfo :projectInfo="projectData"/>
       </el-col>
-      <el-col :span="6">
+      <el-col :xs="5" :sm="5" :md="5" :lg="5" :xl="6">
         <BugTypeCountWithProject :projectId="this.$route.query.projectId"/>
       </el-col>
-      <el-col :span="6">
+      <el-col :xs="5" :sm="5" :md="5" :lg="5" :xl="6">
         <BugCategoryCountWithProject :projectId="this.$route.query.projectId"/>
       </el-col>
-      <el-col :span="6">
+      <el-col :xs="5" :sm="5" :md="5" :lg="5" :xl="6">
         <BugDeveloperCountWithProject :projectId="this.$route.query.projectId"/>
       </el-col>
     </el-row>
@@ -47,7 +47,6 @@ import BugTypeCountWithProject from "@/components/chart/project/BugTypeCountWith
 import BugCategoryCountWithProject from "@/components/chart/bug/BugCategoryCountWithProject";
 import BugDeveloperCountWithProject from "@/components/chart/bug/BugDeveloperCountWithProject";
 import PhaseList from "@/components/data/PhaseList";
-import axios from "axios";
 
 export default {
   components: {

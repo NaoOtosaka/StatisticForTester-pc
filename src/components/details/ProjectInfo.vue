@@ -119,6 +119,6 @@ export default {
 }
 
 .box-card {
-  width: 480px;
+  width: 100%;
 }
 </style>
