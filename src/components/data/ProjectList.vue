@@ -17,6 +17,7 @@
     >
     </el-table-column>
     <el-table-column
+        v-if="data"
         label="操作"
         width="100">
       <template slot-scope="scope">
@@ -39,47 +40,49 @@ export default {
   computed: {
     // 计算属性的 getter
     reversedMessage: function () {
-      if(this.data.length > 0){
-        let item = this.data[0]
-        console.log(item)
-        let temp = []
+      if (this.data){
+        if(this.data.length > 0){
+          let item = this.data[0]
+          console.log(item)
+          let temp = []
 
-        if (item.hasOwnProperty('projectId')) {
-          // console.log(1)
-          temp.push({
-            type: 'projectId',
-            name: '项目ID',
-            sortable: true,
-            column: "150px"
-          })
+          if (item.hasOwnProperty('projectId')) {
+            // console.log(1)
+            temp.push({
+              type: 'projectId',
+              name: '项目ID',
+              sortable: true,
+              column: "150px"
+            })
+          }
+          if (item.hasOwnProperty('projectName')) {
+            temp.push({
+              type: 'projectName',
+              name: '项目名',
+              sortable: false,
+            })
+          }
+          if (item.hasOwnProperty('category')) {
+            temp.push({
+              type: 'category',
+              name: '所属项目',
+              column: "350px",
+              sortable: false
+            })
+          }
+          if (item.hasOwnProperty('planner')) {
+            temp.push({
+              type: 'planner',
+              name: '策划',
+              column: "350px",
+              sortable: false
+            })
+          }
+          return temp
         }
-        if (item.hasOwnProperty('projectName')) {
-          temp.push({
-            type: 'projectName',
-            name: '项目名',
-            sortable: false,
-          })
+        else{
+          return false
         }
-        if (item.hasOwnProperty('category')) {
-          temp.push({
-            type: 'category',
-            name: '所属项目',
-            column: "350px",
-            sortable: false
-          })
-        }
-        if (item.hasOwnProperty('planner')) {
-          temp.push({
-            type: 'planner',
-            name: '策划',
-            column: "350px",
-            sortable: false
-          })
-        }
-        return temp
-      }
-      else{
-        return false
       }
     }
   },

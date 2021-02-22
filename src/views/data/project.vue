@@ -1,7 +1,7 @@
 <!--仪表盘主框架-->
 <template>
   <div>
-    <Tabs />
+    <Tabs  v-on:sendProjectCategory="test"/>
     <ProjectList :data="bug_data"/>
   </div>
 </template>
@@ -17,22 +17,28 @@ export default {
   },
   data() {
     return {
-      bug_data: []
+      bug_data: [],
+      category: 2
     }
   },
   methods: {
-    projectList(){
+    projectList(category){
       this.axios({
         url: "/api/v1/project/list",
         method: "get",
-        params: {}
+        params: {
+          'categoryId': category
+        }
       }).then(res => {
         this.bug_data = res.data.data
       })
+    },
+    test(category){
+      this.projectList(category)
     }
   },
   mounted() {
-    this.projectList()
+    this.projectList(this.category)
   }
 };
 </script>

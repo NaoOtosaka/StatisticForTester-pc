@@ -49,9 +49,6 @@ export default {
     }
   },
   methods: {
-    toUrl(url){
-      this.$router.push(url)
-    },
     changeNavStatus() {
       this.isCollapse = !this.isCollapse
       this.$emit('sendNavStatus', this.isCollapse)
