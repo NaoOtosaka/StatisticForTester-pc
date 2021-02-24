@@ -2,11 +2,8 @@
 <template>
   <div>
     <el-row>
-      <el-page-header @back="goBack" content="项目详情">
+      <el-page-header @back="goBack" :content="this.projectData['projectName']">
       </el-page-header>
-      <h2>
-        项目信息总览
-      </h2>
       <br>
       <el-col :xs="5" :sm="5" :md="5" :lg="5" :xl="5" :offset="1">
         <ProjectInfo :projectInfo="projectData"/>
