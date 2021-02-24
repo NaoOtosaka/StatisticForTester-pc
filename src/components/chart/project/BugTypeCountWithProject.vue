@@ -38,7 +38,7 @@ export default {
       // 循环读取接口数据
       console.log(res[0].data.data)
       for (let i=0;i<res[0].data.data.length;i++) {
-        this.bugTypeData.push({value: res[0].data.data[i][1], name: res[0].data.data[i][0]})
+        this.bugTypeData.push({value: res[0].data.data[i][0], name: res[0].data.data[i][1]})
       }
     },
     myEcharts() {
