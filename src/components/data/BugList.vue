@@ -13,6 +13,9 @@
                        :width="item.column"
                        show-overflow-tooltip
       >
+        <a :href="'http://km.pm.netease.com/v6/issues/' + bugData[index]['kbId']" v-if="item.url">
+          {{ bugData[index]['kbId'] }}
+        </a>
       </el-table-column>
 <!--      <el-table-column-->
 <!--          label="操作"-->
@@ -38,6 +41,7 @@ export default {
     // 计算属性的 getter
     reversedMessage: function () {
       if (this.bugData) {
+        console.log(this.bugData)
         if (this.bugData.length > 0) {
           let item = this.bugData[0]
           console.log(item)
@@ -57,7 +61,8 @@ export default {
               type: 'kbId',
               name: '看板ID',
               sortable: false,
-              column: "150px"
+              column: "150px",
+              url: true
             })
           }
           if (item.hasOwnProperty('bugTitle')) {

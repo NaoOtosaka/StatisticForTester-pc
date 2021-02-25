@@ -18,7 +18,7 @@ export default {
   data() {
     return {
       bug_data: [],
-      category: 2
+      category: 3
     }
   },
   methods: {

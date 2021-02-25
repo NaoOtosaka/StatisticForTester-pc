@@ -52,7 +52,7 @@ export default {
               type: 'projectId',
               name: '项目ID',
               sortable: true,
-              column: "150px"
+              column: "100px"
             })
           }
           if (item.hasOwnProperty('projectName')) {
@@ -62,10 +62,10 @@ export default {
               sortable: false,
             })
           }
-          if (item.hasOwnProperty('category')) {
+          if (item.hasOwnProperty('doc_url')) {
             temp.push({
-              type: 'category',
-              name: '所属项目',
+              type: 'doc_url',
+              name: '文档地址',
               column: "350px",
               sortable: false
             })
@@ -74,7 +74,27 @@ export default {
             temp.push({
               type: 'planner',
               name: '策划',
-              column: "350px",
+              sortable: false
+            })
+          }
+          if (item.hasOwnProperty('tester')) {
+            temp.push({
+              type: 'tester',
+              name: '跟进QA',
+              sortable: false
+            })
+          }
+          if (item.hasOwnProperty('test_time')) {
+            temp.push({
+              type: 'test_time',
+              name: '提测时间',
+              sortable: false
+            })
+          }
+          if (item.hasOwnProperty('publish_time')) {
+            temp.push({
+              type: 'publish_time',
+              name: '上线时间',
               sortable: false
             })
           }
