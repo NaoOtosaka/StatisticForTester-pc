@@ -8,14 +8,27 @@
       ref="table"
       stripe>
     <el-table-column
-        v-for="(item,index) in reversedMessage" :key="index"
-        :prop="item.type"
-        :label="item.name"
-        :sortable="item.sortable"
-        :width="item.column"
-        show-overflow-tooltip
-    >
+        prop="testerId"
+        label="ID"
+        sortable
+        width="150px"
+        show-overflow-tooltip>
     </el-table-column>
+    <el-table-column
+        prop="testerName"
+        label="姓名"
+        show-overflow-tooltip>
+      <template slot-scope="scope">
+        <a href="">
+          {{ scope.row.testerName }}
+        </a>
+      </template>
+    </el-table-column>
+    <el-table-column
+      prop="testerEmail"
+      label="邮箱"
+      show-overflow-tooltip>
+  </el-table-column>
 <!--    <el-table-column-->
 <!--        label="操作"-->
 <!--        width="100">-->

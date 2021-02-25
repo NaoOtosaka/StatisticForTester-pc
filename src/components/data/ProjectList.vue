@@ -8,18 +8,50 @@
       ref="table"
       stripe>
     <el-table-column
-        v-for="(item,index) in reversedMessage" :key="index"
-        :prop="item.type"
-        :label="item.name"
-        :sortable="item.sortable"
-        :width="item.column"
-        show-overflow-tooltip
-    >
+        prop="projectId"
+        label="项目ID"
+        sortable
+        show-overflow-tooltip>
+    </el-table-column>
+    <el-table-column
+        prop="projectName"
+        label="项目名"
+        show-overflow-tooltip>
+    </el-table-column>
+    <el-table-column
+        prop="doc_url"
+        label="文档地址"
+        width="700px"
+        show-overflow-tooltip>
+      <template slot-scope="scope">
+        <el-input v-model="input" style="width: 90%" placeholder="请输入内容"></el-input>
+        <el-button type="text" style="float: right">编辑</el-button>
+      </template>
+    </el-table-column>
+    <el-table-column
+        prop="planner"
+        label="策划"
+        show-overflow-tooltip>
+    </el-table-column>
+    <el-table-column
+        prop="tester"
+        label="跟进QA"
+        show-overflow-tooltip>
+    </el-table-column>
+    <el-table-column
+        prop="test_time"
+        label="提测时间"
+        show-overflow-tooltip>
+    </el-table-column>
+    <el-table-column
+        prop="publish_time"
+        label="上线时间"
+        show-overflow-tooltip>
     </el-table-column>
     <el-table-column
         v-if="data"
         label="操作"
-        width="100">
+    >
       <template slot-scope="scope">
         <el-button type="text" size="small" @click="toInfoUrl(scope.row.projectId)">查看详情</el-button>
 <!--        <el-button type="text" size="small">编辑</el-button>-->
@@ -35,75 +67,6 @@ export default {
     return {
       dataColumn: [],
       tableHeight: 50 //表格高度默认初始值
-    }
-  },
-  computed: {
-    // 计算属性的 getter
-    reversedMessage: function () {
-      if (this.data){
-        if(this.data.length > 0){
-          let item = this.data[0]
-          console.log(item)
-          let temp = []
-
-          if (item.hasOwnProperty('projectId')) {
-            // console.log(1)
-            temp.push({
-              type: 'projectId',
-              name: '项目ID',
-              sortable: true,
-              column: "100px"
-            })
-          }
-          if (item.hasOwnProperty('projectName')) {
-            temp.push({
-              type: 'projectName',
-              name: '项目名',
-              sortable: false,
-            })
-          }
-          if (item.hasOwnProperty('doc_url')) {
-            temp.push({
-              type: 'doc_url',
-              name: '文档地址',
-              column: "350px",
-              sortable: false
-            })
-          }
-          if (item.hasOwnProperty('planner')) {
-            temp.push({
-              type: 'planner',
-              name: '策划',
-              sortable: false
-            })
-          }
-          if (item.hasOwnProperty('tester')) {
-            temp.push({
-              type: 'tester',
-              name: '跟进QA',
-              sortable: false
-            })
-          }
-          if (item.hasOwnProperty('test_time')) {
-            temp.push({
-              type: 'test_time',
-              name: '提测时间',
-              sortable: false
-            })
-          }
-          if (item.hasOwnProperty('publish_time')) {
-            temp.push({
-              type: 'publish_time',
-              name: '上线时间',
-              sortable: false
-            })
-          }
-          return temp
-        }
-        else{
-          return false
-        }
-      }
     }
   },
   methods: {

@@ -1,5 +1,5 @@
 <template>
-  <el-card shadow="hover" class="box-card">
+  <el-card shadow="hover">
     <div slot="header" class="clearfix">
       <span>项目基础信息</span>
     </div>
@@ -117,7 +117,4 @@ export default {
   clear: both
 }
 
-.box-card {
-  width: 100%;
-}
 </style>
