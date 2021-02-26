@@ -11,6 +11,7 @@
         prop="projectId"
         label="项目ID"
         sortable
+        width="100px"
         show-overflow-tooltip>
     </el-table-column>
     <el-table-column
@@ -21,40 +22,127 @@
     <el-table-column
         prop="doc_url"
         label="文档地址"
-        width="700px"
+        width="600px"
         show-overflow-tooltip>
       <template slot-scope="scope">
-        <el-input v-model="input" style="width: 90%" placeholder="请输入内容"></el-input>
-        <el-button type="text" style="float: right">编辑</el-button>
+        <span v-if="docEditTag === false" style="width: 95%">
+          {{ scope.row.doc_url }}
+        </span>
+        <el-input
+            v-if="docEditTag && editIndex === scope.row.projectId"
+            v-model="scope.row.doc_url"
+            style="width: 95%"
+            :placeholder="scope.row.doc_url">
+        </el-input>
       </template>
     </el-table-column>
     <el-table-column
         prop="planner"
         label="策划"
         show-overflow-tooltip>
+      <template slot-scope="scope">
+        <span v-if="docEditTag === false" style="width: 95%">
+          {{ scope.row.planner }}
+        </span>
+        <el-select
+            v-if="docEditTag && editIndex === scope.row.projectId"
+            style="width: 100%"
+            v-model="scope.row.planner"
+            placeholder="请选择策划">
+          <el-option
+              v-for="item in plannerData"
+              :key="item.plannerId"
+              :label="item.plannerName"
+              :value="item.plannerId">
+          </el-option>
+        </el-select>
+      </template>
     </el-table-column>
     <el-table-column
         prop="tester"
         label="跟进QA"
         show-overflow-tooltip>
+      <template slot-scope="scope">
+        <span v-if="docEditTag === false" style="width: 95%">
+          <span v-for="index in scope.row.tester">
+            {{ testerShowData[index] }}
+            <span v-if="index !== scope.row.tester.length">
+              、
+            </span>
+          </span>
+        </span>
+        <el-select
+            v-if="docEditTag && editIndex === scope.row.projectId"
+            v-model="scope.row.tester"
+            clearable placeholder="全部"
+            style="height: 100%"
+            multiple>
+          <el-option
+              v-for="item in testerListData"
+              :key="item.testerId"
+              :label="item.testerName"
+              :value="item.testerId">
+          </el-option>
+        </el-select>
+      </template>
     </el-table-column>
     <el-table-column
         prop="test_time"
         label="提测时间"
         show-overflow-tooltip>
+      <template slot-scope="scope">
+        <span v-if="docEditTag === false" style="width: 100%;height: 100%">
+          {{ scope.row.test_time }}
+        </span>
+        <div v-if="docEditTag && editIndex === scope.row.projectId" class="block">
+          <el-date-picker
+              v-model="scope.row.test_time"
+              type="date"
+              placeholder="选择日期"
+          style="width: 100%">
+          </el-date-picker>
+        </div>
+      </template>
     </el-table-column>
     <el-table-column
         prop="publish_time"
         label="上线时间"
         show-overflow-tooltip>
+      <template slot-scope="scope">
+        <span v-if="docEditTag === false" style="width: 100%;height: 100%">
+          {{ scope.row.publish_time }}
+        </span>
+        <div v-if="docEditTag && editIndex === scope.row.projectId" class="block">
+          <el-date-picker
+              v-model="scope.row.publish_time"
+              type="date"
+              placeholder="选择日期"
+              style="width: 100%">
+          </el-date-picker>
+        </div>
+      </template>
     </el-table-column>
     <el-table-column
-        v-if="data"
         label="操作"
-    >
+        width="140px">
       <template slot-scope="scope">
-        <el-button type="text" size="small" @click="toInfoUrl(scope.row.projectId)">查看详情</el-button>
-<!--        <el-button type="text" size="small">编辑</el-button>-->
+        <el-button
+            type="text"
+            @click="toInfoUrl(scope.row.projectId)">
+          查看详情
+        </el-button>
+        <el-button
+            type="text"
+            v-if="docEditTag === false"
+            @click="changeEditStatus(scope.row.projectId)">
+          编辑
+        </el-button>
+        <el-button
+            type="text"
+            v-if="docEditTag && editIndex === scope.row.projectId"
+            @click="resetEditStatus">
+          保存
+        </el-button>
       </template>
     </el-table-column>
   </el-table>
@@ -66,27 +154,73 @@ export default {
   data() {
     return {
       dataColumn: [],
-      tableHeight: 50 //表格高度默认初始值
+      testerListData: [],
+      testerShowData: {},
+      tableHeight: 50,
+      docEditTag: false,
+      editIndex: -1,
+      plannerData: []
     }
   },
   methods: {
+    test() {
+      this.projectData = this.projectInfo
+    },
     toInfoUrl(projectId){
-      // console.log(projectId)
       this.$router.push({path:'/data/project/info', query:{projectId: projectId}})
-    }
+    },
+    testerList(){
+      this.axios({
+        url: "/api/v1/tester/list",
+        method: "get",
+        params: {}
+      }).then(res => {
+        this.testerListData = res.data.data
+        this.getTesterShowList(res.data.data)
+        console.log(this.testerListData)
+      })
+    },
+    getTesterShowList(res) {
+      console.log(res)
+      for (let i=0;i<res.length;i++){
+        this.testerShowData[res[i]['testerId']] = res[i]['testerName']
+      }
+      console.log(this.testerShowData)
+    },
+    getPlannerList() {
+      this.axios({
+        url: "/api/v1/planner/list",
+        method: "get",
+        params: {}
+      }).then(res=> {
+        this.plannerData = res.data.data
+        console.log(this.plannerData)
+      })
+    },
+    sendTesterId(value) {
+      console.log(value)
+      this.$forceUpdate()
+    },
+    changeEditStatus(index) {
+      this.docEditTag = !this.docEditTag
+      this.editIndex = index
+    },
+    resetEditStatus() {
+      this.docEditTag = !this.docEditTag
+      this.editIndex = -1
+    },
   },
   mounted:function(){
+    this.testerList()
+    this.getPlannerList()
     this.$nextTick(function () {
       this.tableHeight = window.innerHeight - this.$refs.table.$el.offsetTop - 50;
-
       // 监听窗口大小变化
       let self = this;
       window.onresize = function() {
         self.tableHeight = window.innerHeight - self.$refs.table.$el.offsetTop - 50
       }
     })
-    //this.$refs.table.$el.offsetTop：表格距离浏览器的高度
-    //50表示你想要调整的表格距离底部的高度（你可以自己随意调整），因为我们一般都有放分页组件的，所以需要给它留一个高度　
-  }
+  },
 }
 </script>
