@@ -20,19 +20,19 @@
         show-overflow-tooltip>
     </el-table-column>
     <el-table-column
-        prop="doc_url"
+        prop="docUrl"
         label="文档地址"
         width="600px"
         show-overflow-tooltip>
       <template slot-scope="scope">
-        <span v-if="docEditTag === false" style="width: 95%">
-          {{ scope.row.doc_url }}
+        <span v-if="docEditTag === false || editIndex !== scope.row.projectId" style="width: 95%">
+          {{ scope.row.docUrl }}
         </span>
         <el-input
             v-if="docEditTag && editIndex === scope.row.projectId"
-            v-model="scope.row.doc_url"
+            v-model="scope.row.docUrl"
             style="width: 95%"
-            :placeholder="scope.row.doc_url">
+            :placeholder="scope.row.docUrl">
         </el-input>
       </template>
     </el-table-column>
@@ -41,8 +41,8 @@
         label="策划"
         show-overflow-tooltip>
       <template slot-scope="scope">
-        <span v-if="docEditTag === false" style="width: 95%">
-          {{ scope.row.planner }}
+        <span v-if="docEditTag === false || editIndex !== scope.row.projectId" style="width: 95%">
+          {{ plannerShowData[scope.row.planner] }}
         </span>
         <el-select
             v-if="docEditTag && editIndex === scope.row.projectId"
@@ -63,10 +63,10 @@
         label="跟进QA"
         show-overflow-tooltip>
       <template slot-scope="scope">
-        <span v-if="docEditTag === false" style="width: 95%">
-          <span v-for="index in scope.row.tester">
-            {{ testerShowData[index] }}
-            <span v-if="index !== scope.row.tester.length">
+        <span v-if="docEditTag === false || editIndex !== scope.row.projectId" style="width: 95%">
+          <span v-for="(value,index) in scope.row.tester">
+            {{ testerShowData[value]}}
+            <span v-if="index !== scope.row.tester.length - 1 && scope.row.tester.length !== 1">
               、
             </span>
           </span>
@@ -87,36 +87,38 @@
       </template>
     </el-table-column>
     <el-table-column
-        prop="test_time"
+        prop="testTime"
         label="提测时间"
         show-overflow-tooltip>
       <template slot-scope="scope">
-        <span v-if="docEditTag === false" style="width: 100%;height: 100%">
-          {{ scope.row.test_time }}
+        <span v-if="docEditTag === false || editIndex !== scope.row.projectId" style="width: 100%;height: 100%">
+          {{ scope.row.testTime }}
         </span>
         <div v-if="docEditTag && editIndex === scope.row.projectId" class="block">
           <el-date-picker
-              v-model="scope.row.test_time"
+              v-model="scope.row.testTime"
               type="date"
               placeholder="选择日期"
-          style="width: 100%">
+              value-format="yyyy-MM-dd"
+              style="width: 100%">
           </el-date-picker>
         </div>
       </template>
     </el-table-column>
     <el-table-column
-        prop="publish_time"
+        prop="publishTime"
         label="上线时间"
         show-overflow-tooltip>
       <template slot-scope="scope">
-        <span v-if="docEditTag === false" style="width: 100%;height: 100%">
-          {{ scope.row.publish_time }}
+        <span v-if="docEditTag === false || editIndex !== scope.row.projectId" style="width: 100%;height: 100%">
+          {{ scope.row.publishTime }}
         </span>
         <div v-if="docEditTag && editIndex === scope.row.projectId" class="block">
           <el-date-picker
-              v-model="scope.row.publish_time"
+              v-model="scope.row.publishTime"
               type="date"
               placeholder="选择日期"
+              value-format="yyyy-MM-dd"
               style="width: 100%">
           </el-date-picker>
         </div>
@@ -140,7 +142,14 @@
         <el-button
             type="text"
             v-if="docEditTag && editIndex === scope.row.projectId"
-            @click="resetEditStatus">
+            @click="updateProjectInfo(
+                scope.row.projectId,
+                scope.row.projectName,
+                scope.row.docUrl,
+                scope.row.planner,
+                scope.row.tester,
+                scope.row.testTime,
+                scope.row.publishTime)">
           保存
         </el-button>
       </template>
@@ -156,10 +165,11 @@ export default {
       dataColumn: [],
       testerListData: [],
       testerShowData: {},
+      plannerData: [],
+      plannerShowData: {},
       tableHeight: 50,
       docEditTag: false,
-      editIndex: -1,
-      plannerData: []
+      editIndex: -1
     }
   },
   methods: {
@@ -194,8 +204,16 @@ export default {
         params: {}
       }).then(res=> {
         this.plannerData = res.data.data
+        this.getPlannerShowList(res.data.data)
         console.log(this.plannerData)
       })
+    },
+    getPlannerShowList(res) {
+      console.log(res)
+      for (let i=0;i<res.length;i++){
+        this.plannerShowData[res[i]['plannerId']] = res[i]['plannerName']
+      }
+      console.log(this.plannerShowData)
     },
     sendTesterId(value) {
       console.log(value)
@@ -209,6 +227,40 @@ export default {
       this.docEditTag = !this.docEditTag
       this.editIndex = -1
     },
+    updateProjectInfo(projectId, projectName, docUrl, plannerId, tester, testTime, publishTime) {
+      console.log(tester)
+      let temp = ''
+      for (let i=0;i<tester.length;i++) {
+        temp += tester[i]
+        if (i !== tester.length - 1){
+          temp += ','
+        }
+      }
+      let params = new URLSearchParams()
+      params.append('projectId', projectId)
+      params.append('projectName', projectName)
+      params.append('plannerId', plannerId)
+      params.append('docUrl', docUrl)
+      params.append('tester',temp);
+      params.append('testTime', testTime)
+      params.append('publishTime', publishTime)
+
+      this.axios({
+        url: "/api/v1/project",
+        method: "put",
+        params: params
+      }).then(res=> {
+        if(res['data']['status'] === 1){
+          this.$message({
+            message: '修改成功',
+            type: 'success'
+          })
+        }else{
+          this.$message.error(res['data']['message'])
+        }
+        this.resetEditStatus()
+      })
+    }
   },
   mounted:function(){
     this.testerList()
