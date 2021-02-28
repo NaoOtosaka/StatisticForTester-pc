@@ -76,7 +76,8 @@
             v-model="scope.row.tester"
             clearable placeholder="全部"
             style="height: 100%"
-            multiple>
+            multiple
+            collapse-tags>
           <el-option
               v-for="item in testerListData"
               :key="item.testerId"
