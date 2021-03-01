@@ -93,14 +93,15 @@
         show-overflow-tooltip>
       <template slot-scope="scope">
         <span v-if="docEditTag === false || editIndex !== scope.row.projectId" style="width: 100%;height: 100%">
-          {{ scope.row.testTime }}
+          {{ dateDeal(scope.row.testTime) }}
         </span>
         <div v-if="docEditTag && editIndex === scope.row.projectId" class="block">
           <el-date-picker
               v-model="scope.row.testTime"
               type="date"
               placeholder="选择日期"
-              value-format="yyyy-MM-dd"
+              format="yyyy-MM-dd"
+              value-format="timestamp"
               style="width: 100%">
           </el-date-picker>
         </div>
@@ -112,14 +113,15 @@
         show-overflow-tooltip>
       <template slot-scope="scope">
         <span v-if="docEditTag === false || editIndex !== scope.row.projectId" style="width: 100%;height: 100%">
-          {{ scope.row.publishTime }}
+          {{ dateDeal(scope.row.publishTime) }}
         </span>
         <div v-if="docEditTag && editIndex === scope.row.projectId" class="block">
           <el-date-picker
               v-model="scope.row.publishTime"
               type="date"
               placeholder="选择日期"
-              value-format="yyyy-MM-dd"
+              format="yyyy-MM-dd"
+              value-format="timestamp"
               style="width: 100%">
           </el-date-picker>
         </div>
@@ -159,6 +161,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   props: ["data"],
   data() {
@@ -174,62 +178,69 @@ export default {
     }
   },
   methods: {
-    test() {
-      this.projectData = this.projectInfo
-    },
     toInfoUrl(projectId){
+      // 项目详情跳转
       this.$router.push({path:'/data/project/info', query:{projectId: projectId}})
     },
     testerList(){
+      // 测试人员列表获取
       this.axios({
         url: "/api/v1/tester/list",
         method: "get",
         params: {}
       }).then(res => {
         this.testerListData = res.data.data
-        this.getTesterShowList(res.data.data)
-        console.log(this.testerListData)
+
+        console.log(res.data.data)
+
+        // 数据处理
+        for (let i=0;i<res.data.data.length;i++){
+          this.testerShowData[res.data.data[i]['testerId']] = res.data.data[i]['testerName']
+        }
       })
     },
-    getTesterShowList(res) {
-      console.log(res)
-      for (let i=0;i<res.length;i++){
-        this.testerShowData[res[i]['testerId']] = res[i]['testerName']
-      }
-      console.log(this.testerShowData)
-    },
     getPlannerList() {
+      // 策划列表获取
       this.axios({
         url: "/api/v1/planner/list",
         method: "get",
         params: {}
       }).then(res=> {
         this.plannerData = res.data.data
-        this.getPlannerShowList(res.data.data)
-        console.log(this.plannerData)
+        // 数据处理
+        for (let i=0;i<res.data.data.length;i++){
+          this.plannerShowData[res.data.data[i]['plannerId']] = res.data.data[i]['plannerName']
+        }
       })
     },
-    getPlannerShowList(res) {
-      console.log(res)
-      for (let i=0;i<res.length;i++){
-        this.plannerShowData[res[i]['plannerId']] = res[i]['plannerName']
-      }
-      console.log(this.plannerShowData)
-    },
-    sendTesterId(value) {
-      console.log(value)
-      this.$forceUpdate()
-    },
     changeEditStatus(index) {
+      // 设置编辑态
       this.docEditTag = !this.docEditTag
       this.editIndex = index
     },
     resetEditStatus() {
+      // 重置编辑态
       this.docEditTag = !this.docEditTag
       this.editIndex = -1
     },
+    editProject(params) {
+      // 编辑项目信息接口
+      return this.axios({
+        url: "/api/v1/project",
+        method: "put",
+        params: params
+      })
+    },
+    editTestRecord(params) {
+      // 编辑测试人员跟进接口
+      return this.axios({
+        url: "/api/v1/project/test_record",
+        method: "put",
+        params: params
+      })
+    },
     updateProjectInfo(projectId, projectName, docUrl, plannerId, tester, testTime, publishTime) {
-      console.log(tester)
+      // 处理测试人员列表
       let temp = ''
       for (let i=0;i<tester.length;i++) {
         temp += tester[i]
@@ -237,35 +248,71 @@ export default {
           temp += ','
         }
       }
-      let params = new URLSearchParams()
-      params.append('projectId', projectId)
-      params.append('projectName', projectName)
-      params.append('plannerId', plannerId)
-      params.append('docUrl', docUrl)
-      params.append('tester',temp);
-      params.append('testTime', testTime)
-      params.append('publishTime', publishTime)
 
-      this.axios({
-        url: "/api/v1/project",
-        method: "put",
-        params: params
-      }).then(res=> {
-        if(res['data']['status'] === 1){
-          this.$message({
-            message: '修改成功',
-            type: 'success'
+      // 提测时间处理
+      let testDate = new Date(testTime)
+      testTime = testDate.getTime()
+
+      // 发布时间处理
+      let publishDate = new Date(publishTime)
+      publishTime = publishDate.getTime()
+
+
+      // 参数封装
+      let projectParams = new URLSearchParams()
+      projectParams.append('projectId', projectId)
+      projectParams.append('projectName', projectName)
+      projectParams.append('plannerId', plannerId)
+      projectParams.append('docUrl', docUrl)
+      projectParams.append('testTime', testTime)
+      projectParams.append('publishTime', publishTime)
+
+      let testerParams = new URLSearchParams()
+      testerParams.append('projectId', projectId)
+      testerParams.append('tester',temp);
+
+      // 接口请求
+      // 请求队列初始化
+      let req_list = [this.editProject(projectParams), this.editTestRecord(testerParams)]
+
+      axios.all(req_list).then(axios.spread((...res) => {
+            let temp = [...res]
+            console.log(temp)
+            let tag = 1
+            for(let i=0;i<temp.length;i++){
+              console.log(temp)
+              if(temp[i]['data']['status'] !== 1){
+                tag = 0
+              }
+            }
+            if(tag){
+              this.$message({
+                message: '修改成功',
+                type: 'success'
+              })
+            }else{
+              this.$message.error('系统错误')
+            }
+            this.resetEditStatus()
           })
-        }else{
-          this.$message.error(res['data']['message'])
-        }
-        this.resetEditStatus()
-      })
+      )
+    },
+    dateDeal(time) {
+      if(time){
+        let da = new Date(time);
+        let year = da.getFullYear()
+        let month = da.getMonth()+1
+        let date = da.getDate()
+        return [year,month,date].join('-')
+      }else{
+        return null
+      }
     }
   },
   mounted:function(){
     this.testerList()
     this.getPlannerList()
+
     this.$nextTick(function () {
       this.tableHeight = window.innerHeight - this.$refs.table.$el.offsetTop - 50;
       // 监听窗口大小变化

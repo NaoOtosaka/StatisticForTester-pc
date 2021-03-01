@@ -6,17 +6,83 @@
         :default-sort = "{order: 'descending'}"
         ref="table"
         stripe>
-      <el-table-column v-for="(item,index) in reversedMessage" :key="index"
-                       :prop="item.type"
-                       :label="item.name"
-                       :sortable="item.sortable"
-                       :width="item.column"
-                       show-overflow-tooltip
-      >
-        <a :href="'http://km.pm.netease.com/v6/issues/' + bugData[index]['kbId']" v-if="item.url">
-          {{ bugData[index]['kbId'] }}
-        </a>
+      <el-table-column
+          prop="bugId"
+          label="ID"
+          sortable
+          width="80px">
       </el-table-column>
+      <el-table-column
+          prop="kbId"
+          label="看板ID"
+          width="100px">
+        <template slot-scope="scope">
+          <el-link target="blank" :href="'http://km.pm.netease.com/v6/issues/' + scope.row.kbId" :underline="false">
+            {{ scope.row.kbId }}
+          </el-link>
+        </template>
+      </el-table-column>
+      <el-table-column
+          prop="bugTitle"
+          label="主题"
+          show-overflow-tooltip>
+      </el-table-column>
+      <el-table-column
+          prop="bugModel"
+          label="模块"
+          width="250%"
+          sortable
+          show-overflow-tooltip>
+      </el-table-column>
+      <el-table-column
+          prop="bugCategory"
+          label="类型"
+          sortable
+          width="150px"
+          show-overflow-tooltip>
+      </el-table-column>
+      <el-table-column
+          prop="bugType"
+          label="跟踪标签"
+          sortable
+          width="150px"
+          show-overflow-tooltip>
+      </el-table-column>
+      <el-table-column
+          prop="projectName"
+          label="项目名"
+          sortable
+          width="150px"
+          show-overflow-tooltip>
+      </el-table-column>
+      <el-table-column
+          prop="testerName"
+          label="QA"
+          sortable
+          width="150px"
+          show-overflow-tooltip>
+      </el-table-column>
+      <el-table-column
+          prop="developerName"
+          label="开发"
+          sortable
+          width="150px"
+          show-overflow-tooltip>
+      </el-table-column>
+
+
+
+<!--      <el-table-column v-for="(item,index) in reversedMessage" :key="index"-->
+<!--                       :prop="item.type"-->
+<!--                       :label="item.name"-->
+<!--                       :sortable="item.sortable"-->
+<!--                       :width="item.column"-->
+<!--                       show-overflow-tooltip-->
+<!--      >-->
+<!--        <a :href="'http://km.pm.netease.com/v6/issues/' + bugData[index]['kbId']" v-if="item.url">-->
+<!--          {{ bugData[index]['kbId'] }}-->
+<!--        </a>-->
+<!--      </el-table-column>-->
 <!--      <el-table-column-->
 <!--          label="操作"-->
 <!--          width="100">-->
@@ -47,38 +113,6 @@ export default {
           console.log(item)
           let temp = []
 
-          if (item.hasOwnProperty('bugId')) {
-            // console.log(1)
-            temp.push({
-              type: 'bugId',
-              name: 'ID',
-              sortable: true,
-              column: "150px"
-            })
-          }
-          if (item.hasOwnProperty('kbId')) {
-            temp.push({
-              type: 'kbId',
-              name: '看板ID',
-              sortable: false,
-              column: "150px",
-              url: true
-            })
-          }
-          if (item.hasOwnProperty('bugTitle')) {
-            temp.push({
-              type: 'bugTitle',
-              name: '主题',
-              sortable: false
-            })
-          }
-          if (item.hasOwnProperty('bugModel')) {
-            temp.push({
-              type: 'bugModel',
-              name: '模块',
-              sortable: true
-            })
-          }
           if (item.hasOwnProperty('bugCategory')) {
             temp.push({
               type: 'bugCategory',
