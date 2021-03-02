@@ -7,14 +7,31 @@
         :default-sort = "{order: 'descending'}"
         ref="table"
         stripe>
-      <el-table-column v-for="(item,index) in reversedMessage" :key="index"
-                      :prop="item.type"
-                      :label="item.name"
-                      :sortable="item.sortable"
-                      :width="item.column"
-                      show-overflow-tooltip
-      >
+      <el-table-column
+          prop="developerId"
+          label="ID"
+          sortable
+          width="150px"
+          show-overflow-tooltip>
       </el-table-column>
+      <el-table-column
+          prop="typeId"
+          label="开发类型"
+          sortable
+          width="250px"
+          show-overflow-tooltip>
+      </el-table-column>
+      <el-table-column
+          prop="developerName"
+          label="姓名"
+          show-overflow-tooltip>
+      </el-table-column>
+      <el-table-column
+          prop="developerEmail"
+          label="邮箱"
+          show-overflow-tooltip>
+      </el-table-column>
+
 <!--      <el-table-column-->
 <!--          label="操作"-->
 <!--          width="100">-->

@@ -44,45 +44,6 @@ export default {
       tableHeight: 50 //表格高度默认初始值
     }
   },
-  computed: {
-    // 计算属性的 getter
-    reversedMessage: function () {
-      if(this.data.length > 0){
-        let item = this.data[0]
-        console.log(item)
-        let temp = []
-
-        if (item.hasOwnProperty('testerId')) {
-          // console.log(1)
-          temp.push({
-            type: 'testerId',
-            name: 'ID',
-            sortable: true,
-            column: "150px"
-          })
-        }
-        if (item.hasOwnProperty('testerName')) {
-          temp.push({
-            type: 'testerName',
-            name: '姓名',
-            sortable: false,
-          })
-        }
-        if (item.hasOwnProperty('testerEmail')) {
-          temp.push({
-            type: 'testerEmail',
-            name: '邮箱',
-            sortable: false
-          })
-        }
-
-        return temp
-      }
-      else{
-        return false
-      }
-    }
-  },
   mounted:function(){
     this.$nextTick(function () {
       this.tableHeight = window.innerHeight - this.$refs.table.$el.offsetTop - 50;
