@@ -18,11 +18,6 @@
         prop="testerName"
         label="姓名"
         show-overflow-tooltip>
-      <template slot-scope="scope">
-        <a href="">
-          {{ scope.row.testerName }}
-        </a>
-      </template>
     </el-table-column>
     <el-table-column
       prop="testerEmail"
