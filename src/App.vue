@@ -55,11 +55,11 @@ export default {
             routePath: "/dashboard",
             icon: 'el-icon-monitor'
           },
-          // {
-          //   name: "管理",
-          //   routePath: "/dashboard/manage",
-          //   icon: 'el-icon-s-operation'
-          // }
+          {
+            name: "上传",
+            routePath: "/dashboard/upload",
+            icon: 'el-icon-upload2'
+          }
         ],
         [
           {

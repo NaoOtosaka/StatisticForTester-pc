@@ -12,8 +12,23 @@ const routes = [
   },
   {
     path: '/dashboard',
-    name: '仪表盘',
-    component: () => import('../views/dashboard/index')
+    component: () => import('../views/dashboard/index'),
+    children: [
+      {
+        path: '/',
+        redirect: 'index'
+      },
+      {
+        path: 'index',
+        name: '仪表盘',
+        component: () => import('../views/dashboard/dashboard'),
+      },
+      {
+        path: 'upload',
+        name: 'csv上传',
+        component: () => import('../views/dashboard/upload')
+      }
+    ]
   },
   {
     path: '/data',
