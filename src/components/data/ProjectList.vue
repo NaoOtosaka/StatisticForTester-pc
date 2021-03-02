@@ -99,6 +99,7 @@
           <el-date-picker
               v-model="scope.row.testTime"
               type="date"
+              :clearable=false
               placeholder="选择日期"
               format="yyyy-MM-dd"
               value-format="timestamp"
@@ -119,6 +120,7 @@
           <el-date-picker
               v-model="scope.row.publishTime"
               type="date"
+              :clearable=false
               placeholder="选择日期"
               format="yyyy-MM-dd"
               value-format="timestamp"
