@@ -38,7 +38,8 @@ export default {
     },
     clearList() {
       this.changeStatus()
-      this.$refs.upload.clearFiles()
+      this.fileList = []
+      // this.$refs.upload.clearFiles()
     },
     watchList() {
       if(this.fileList.length === 0){
