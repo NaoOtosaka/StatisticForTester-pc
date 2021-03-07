@@ -40,6 +40,23 @@
           sortable
           width="150px"
           show-overflow-tooltip>
+        <template slot-scope="scope">
+          <el-select
+              style="width: 100%"
+              v-model="scope.row.bugCategory"
+              placeholder="请选择分类"
+              @change="updateBugInfo(
+                  scope.row.kbId,
+                  scope.row.bugCategory
+              )">
+            <el-option
+                v-for="item in categoryListData"
+                :key="item.categoryId"
+                :label="item.categoryName"
+                :value="item.categoryId">
+            </el-option>
+          </el-select>
+        </template>
       </el-table-column>
       <el-table-column
           prop="bugType"
@@ -69,27 +86,89 @@
           width="150px"
           show-overflow-tooltip>
       </el-table-column>
-<!--      <el-table-column-->
-<!--          label="操作"-->
-<!--          width="100">-->
-<!--        <template slot-scope="scope">-->
-<!--          <el-button type="text" size="small">查看</el-button>-->
-<!--          <el-button type="text" size="small">编辑</el-button>-->
-<!--        </template>-->
-<!--      </el-table-column>-->
     </el-table>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
-  props: ["bugData"],
+  // props: ["bugData"],
+  props: {
+    bugData: {
+      default: null
+    },
+    getChartsRef: {
+      default: null
+    }
+  },
   data() {
     return {
       dataColumn: [],
-      tableHeight: 50, //表格高度默认初始值
+      tableHeight: 50,
+      categoryListData: [],
+      categoryShowData: [],
+    }
+  },
+  methods: {
+    categoryList(){
+      this.axios({
+        url: "/api/v1/bug/category/list",
+        method: "get",
+        params: {}
+      }).then(res => {
+        console.log(res.data.data)
+        this.categoryListData = res.data.data
+
+        // 数据处理
+        for (let i=0;i<res.data.data.length;i++){
+          this.categoryShowData[res.data.data[i]['categoryId']] = res.data.data[i]['categoryName']
+        }
+      })
+    },
+    editBugCategory(params) {
+      // 编辑测试人员跟进接口
+      return this.axios({
+        url: "/api/v1/bug/edit_category",
+        method: "put",
+        params: params
+      })
+    },
+    updateBugInfo(bugId, categoryId){
+      // 参数封装
+      let bugParams = new URLSearchParams()
+      bugParams.append('kbId', bugId)
+      bugParams.append('bugCategory', categoryId)
+
+      // 接口请求
+      // 请求队列初始化
+      let req_list = [this.editBugCategory(bugParams)]
+
+      axios.all(req_list).then(axios.spread((...res) => {
+            let temp = [...res]
+            console.log(temp)
+            let tag = 1
+            for(let i=0;i<temp.length;i++){
+              console.log(temp)
+              if(temp[i]['data']['status'] !== 1){
+                tag = 0
+              }
+            }
+            if(tag){
+              this.$message({
+                message: '修改成功',
+                type: 'success'
+              })
+            }else{
+              this.$message.error('系统错误')
+            }
+            this.getChartsRef()
+          })
+      )
     }
   },
   mounted:function(){
+    this.categoryList()
     this.$nextTick(function () {
       this.tableHeight = window.innerHeight - this.$refs.table.$el.offsetTop - 50;
 
@@ -99,8 +178,6 @@ export default {
         self.tableHeight = window.innerHeight - self.$refs.table.$el.offsetTop - 50
       }
     })
-    //this.$refs.table.$el.offsetTop：表格距离浏览器的高度
-    //50表示你想要调整的表格距离底部的高度（你可以自己随意调整），因为我们一般都有放分页组件的，所以需要给它留一个高度　
   }
 }
 </script>

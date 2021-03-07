@@ -4,24 +4,22 @@
     <el-page-header @back="goBack" :content="this.projectData['projectName']">
     </el-page-header>
     <br>
-    <div style="width: 100%">
+    <div style="overflow: hidden;width: 100%">
       <ProjectInfo style="margin-left:2%;width: 23%;box-sizing:border-box;float: left" :projectInfo="projectData"/>
       <BugTypeCountWithProject style="width: 25%;float: left" :projectId="this.$route.query.projectId"/>
-      <BugCategoryCountWithProject style="width: 25%;float: left" :projectId="this.$route.query.projectId"/>
+      <BugCategoryCountWithProject ref="categoryCharts" style="width: 25%;float: left" :projectId="this.$route.query.projectId"/>
       <BugDeveloperCountWithProject style="width: 25%;float: left" :projectId="this.$route.query.projectId"/>
     </div>
-    <el-row>
-      <el-col :span="24">
-        <BugTypeCountWithPhase :projectId="this.$route.query.projectId"/>
-      </el-col>
-    </el-row>
+    <div>
+      <BugTypeCountWithPhase :projectId="this.$route.query.projectId"/>
+    </div>
     <el-row>
       <el-col :span="24">
         <h2>
           阶段BUG汇总
         </h2>
         <br>
-        <PhaseList :phaseList="this.projectData['projectPhase']"/>
+        <PhaseList :getChartsRef="getCount" :phaseList="this.projectData['projectPhase']"/>
       </el-col>
     </el-row>
   </div>
@@ -63,6 +61,9 @@ export default {
     },
     goBack() {
       this.$router.go(-1)
+    },
+    getCount() {
+      this.$refs.categoryCharts.getBugCount()
     }
   },
   mounted() {

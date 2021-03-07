@@ -1,7 +1,7 @@
 <template>
   <el-collapse>
     <el-collapse-item
-        v-for="item in this.phaseList"
+        v-for="item in phaseList"
         :name="item.phaseId">
       <template slot="title">
         <span style="font-size: medium">
@@ -11,7 +11,7 @@
         </span>
       </template>
       <div v-if="bugData[item.phaseId]">
-        <BugList :bugData="bugData[item.phaseId]"/>
+        <BugList :getChartsRef="getChartsRef" :bugData="bugData[item.phaseId]"/>
       </div>
     </el-collapse-item>
   </el-collapse>
@@ -22,9 +22,14 @@ import axios from "axios";
 import BugList from "@/components/data/BugList";
 
 export default {
-  props: [
-      'phaseList'
-  ],
+  props: {
+    phaseList: {
+      default: null
+    },
+    getChartsRef: {
+      default: null
+    }
+  },
   components: {
     BugList
   },
@@ -77,9 +82,9 @@ export default {
       )
     },
   },
-  // mounted() {
-  //   this.getBugListWithPhase()
-  // },
+  mounted() {
+    console.log(this.getChartsRef)
+  },
   watch: {
     phaseList: 'getBugListWithPhase',
   }

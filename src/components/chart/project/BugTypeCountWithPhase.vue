@@ -30,8 +30,9 @@ export default {
             })
           ]
       ).then(res => {
-            this.getData(res);
-            this.myEcharts();
+            this.getData(res)
+            this.myEcharts()
+            this.myResize()
           }
       )
     },
@@ -99,10 +100,18 @@ export default {
       };
       // 使用刚指定的配置项和数据显示图表。
       this.myChart.setOption(option);
+    },
+    myResize() {
+      window.addEventListener('resize' ,()=>{
+        if (this.myChart){
+          this.myChart.resize()
+        }
+      })
     }
   },
   mounted() {
     this.getBugCount()
+    this.myResize()
   },
   watch: {
     projectId: 'getBugCount'
