@@ -18,7 +18,6 @@ export default {
   },
   methods: {
     getBugCount(){
-      console.log("2134rfdsabvd")
       axios.all(
           [
             axios.get('/api/v1/project/bug_category', {
@@ -52,7 +51,7 @@ export default {
       let option = {
         title: {
           left: 'center',
-          text: 'BUG分类统计',
+          text: '项目BUG分类占比',
         },
         tooltip: {
           trigger: 'item'

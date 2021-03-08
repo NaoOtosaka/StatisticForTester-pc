@@ -52,7 +52,7 @@ export default {
       let option = {
         title: {
           left: 'center',
-          text: 'BUG类型统计'
+          text: '项目BUG类型占比'
         },
         tooltip: {},
         series: [{

@@ -5,10 +5,10 @@
     </el-page-header>
     <br>
     <div style="overflow: hidden;width: 100%">
-      <ProjectInfo style="margin-left:2%;width: 23%;box-sizing:border-box;float: left" :projectInfo="projectData"/>
-      <BugTypeCountWithProject style="width: 25%;float: left" :projectId="this.$route.query.projectId"/>
-      <BugCategoryCountWithProject ref="categoryCharts" style="width: 25%;float: left" :projectId="this.$route.query.projectId"/>
-      <BugDeveloperCountWithProject style="width: 25%;float: left" :projectId="this.$route.query.projectId"/>
+<!--      <ProjectInfo style="margin-left:2%;width: 25%;box-sizing:border-box;float: left" :projectInfo="projectData"/>-->
+      <BugTypeCountWithProject style="margin-left: 5%;width: 45%;float: left" :projectId="this.$route.query.projectId"/>
+      <BugCategoryCountWithProject ref="categoryCharts" style="width: 45%;float: left" :projectId="this.$route.query.projectId"/>
+<!--      <BugDeveloperCountWithProject style="width: 25%;float: left" :projectId="this.$route.query.projectId"/>-->
     </div>
     <div>
       <BugTypeCountWithPhase :projectId="this.$route.query.projectId"/>
