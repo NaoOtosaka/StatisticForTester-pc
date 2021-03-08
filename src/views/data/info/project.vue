@@ -11,6 +11,9 @@
 <!--      <BugDeveloperCountWithProject style="width: 25%;float: left" :projectId="this.$route.query.projectId"/>-->
     </div>
     <div>
+      <BugCountByDate :projectId="this.$route.query.projectId"/>
+    </div>
+    <div>
       <BugTypeCountWithPhase :projectId="this.$route.query.projectId"/>
     </div>
     <el-row>
@@ -32,6 +35,7 @@ import BugCategoryCountWithProject from "@/components/chart/bug/BugCategoryCount
 import BugDeveloperCountWithProject from "@/components/chart/bug/BugDeveloperCountWithProject";
 import PhaseList from "@/components/data/PhaseList";
 import BugTypeCountWithPhase from "@/components/chart/project/BugTypeCountWithPhase";
+import BugCountByDate from "@/components/chart/project/BugCountByDate";
 
 export default {
   components: {
@@ -40,7 +44,8 @@ export default {
     BugCategoryCountWithProject,
     BugDeveloperCountWithProject,
     PhaseList,
-    BugTypeCountWithPhase
+    BugTypeCountWithPhase,
+    BugCountByDate
   },
   data() {
     return {

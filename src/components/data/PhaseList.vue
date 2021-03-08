@@ -4,11 +4,13 @@
         v-for="item in phaseList"
         :name="item.phaseId">
       <template slot="title">
-        <span style="font-size: medium">
-          <b style="text-align: left">
-          {{ item.name }}({{ item.count }})
-          </b>
-        </span>
+        <div style="width: 20%;text-align: left">
+          <span style="font-size: medium;">
+            <b style="text-align: left">
+            {{ item.name }}({{ item.count }})
+            </b>
+          </span>
+        </div>
       </template>
       <div v-if="bugData[item.phaseId]">
         <BugList :getChartsRef="getChartsRef" :bugData="bugData[item.phaseId]"/>

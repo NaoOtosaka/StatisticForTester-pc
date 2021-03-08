@@ -22,7 +22,7 @@
     <el-table-column
         prop="docUrl"
         label="文档地址"
-        width="600px"
+        width="500px"
         show-overflow-tooltip>
       <template slot-scope="scope">
         <span v-if="docEditTag === false || editIndex !== scope.row.projectId" style="width: 95%">
@@ -258,6 +258,11 @@ export default {
       // 发布时间处理
       let publishDate = new Date(publishTime)
       publishTime = publishDate.getTime()
+
+      // 文档链接空字符处理
+      if(docUrl === null){
+        docUrl = ''
+      }
 
 
       // 参数封装
