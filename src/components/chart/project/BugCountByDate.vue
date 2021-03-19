@@ -1,6 +1,6 @@
 <template>
   <div class="Echarts">
-    <div id="bugCountByDate" style="width: auto;height:400px;"></div>
+    <div id="bugCountByDate" style="width: 100%;height:400px;"></div>
   </div>
 </template>
 
@@ -23,7 +23,7 @@ export default {
           [
             axios.get('/api/v1/project/bug_trend', {
               params:{
-                testerId: this.testerId
+                projectId: this.projectId
               }
             })
           ]
@@ -94,7 +94,7 @@ export default {
           }
         },
         title: {
-          left: 'center',
+          left: 'left',
           text: '异常新增趋势',
         },
         toolbox: {
@@ -105,6 +105,12 @@ export default {
             restore: {},
             saveAsImage: {}
           }
+        },
+        grid: {
+          left: '3%',
+          right: '4%',
+          bottom: '7%',
+          containLabel: true
         },
         xAxis: {
           type: 'category',

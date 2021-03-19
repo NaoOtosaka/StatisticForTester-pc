@@ -69,18 +69,20 @@ export default {
       // 指定图表的配置项和数据
       let option = {
         title: {
+          left: 'left',
           text: 'BUG类型趋势统计'
         },
         tooltip: {
           trigger: 'axis'
         },
         legend: {
+          bottom: '0%',
           data: this.typeList
         },
         grid: {
           left: '3%',
           right: '4%',
-          bottom: '3%',
+          bottom: '7%',
           containLabel: true
         },
         toolbox: {

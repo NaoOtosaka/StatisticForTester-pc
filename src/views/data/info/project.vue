@@ -4,6 +4,16 @@
     <el-page-header @back="goBack" :content="this.projectData['projectName']">
     </el-page-header>
     <br>
+    <h2>
+      测试通过率趋势统计
+    </h2>
+    <div>
+      <PassRateStatistics style="width: 25%;margin-left: 2%"/>
+    </div>
+    <h2>
+      基础异常数据统计
+    </h2>
+    <br>
     <div style="overflow: hidden;width: 100%">
 <!--      <ProjectInfo style="margin-left:2%;width: 25%;box-sizing:border-box;float: left" :projectInfo="projectData"/>-->
       <BugTypeCountWithProject style="margin-left: 5%;width: 45%;float: left" :projectId="this.$route.query.projectId"/>
@@ -36,6 +46,7 @@ import BugDeveloperCountWithProject from "@/components/chart/bug/BugDeveloperCou
 import PhaseList from "@/components/data/PhaseList";
 import BugTypeCountWithPhase from "@/components/chart/project/BugTypeCountWithPhase";
 import BugCountByDate from "@/components/chart/project/BugCountByDate";
+import PassRateStatistics from "@/components/base/PassRateStatistics";
 
 export default {
   components: {
@@ -45,7 +56,8 @@ export default {
     BugDeveloperCountWithProject,
     PhaseList,
     BugTypeCountWithPhase,
-    BugCountByDate
+    BugCountByDate,
+    PassRateStatistics
   },
   data() {
     return {

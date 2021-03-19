@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import csvUpload from "@/components/base/csvUpload";
+import csvUpload from "@/components/base/CsvUpload";
 
 export default {
   components: {
