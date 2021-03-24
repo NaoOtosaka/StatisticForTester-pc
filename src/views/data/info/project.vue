@@ -21,10 +21,10 @@
 <!--      <BugDeveloperCountWithProject style="width: 25%;float: left" :projectId="this.$route.query.projectId"/>-->
     </div>
     <div>
-      <BugCountByDate :projectId="this.$route.query.projectId"/>
+      <BugTypeCountWithPhase :projectId="this.$route.query.projectId"/>
     </div>
     <div>
-      <BugTypeCountWithPhase :projectId="this.$route.query.projectId"/>
+      <BugCountByDate :projectId="this.$route.query.projectId"/>
     </div>
     <el-row>
       <el-col :span="24">
