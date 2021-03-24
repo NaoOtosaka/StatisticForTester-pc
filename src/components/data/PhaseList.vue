@@ -72,20 +72,14 @@ export default {
       }
       axios.all(req_list).then(axios.spread((...res) => {
             let temp = [...res]
-            // console.log(temp)
             temp.forEach((item, index) => {
               this.bugData[req_num[index]] = item['data']['data']
               this.bugCount[req_num[index]] = item['data']['data'].length
             })
-            // console.log(this.phaseList)
-            // console.log(this.bugData[this.phaseList[0]['phaseId']])
         this.$forceUpdate()
           })
       )
     },
-  },
-  mounted() {
-    console.log(this.getChartsRef)
   },
   watch: {
     phaseList: 'getBugListWithPhase',

@@ -1,6 +1,5 @@
 <template>
     <el-table
-        v-loading="loading"
         :data="data"
         border
         width="100%"

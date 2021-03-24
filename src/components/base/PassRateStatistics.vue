@@ -6,33 +6,38 @@
     <div>
       <el-collapse accordion>
         <el-collapse-item v-for="item in this.platformListData" :title="item.plan_name">
-          <el-table
-              stripe
-              :show-header="false"
-              :data="item.platform_list"
-              style="width: 100%">
-            <el-table-column
-                prop="desc"
-                label="描述"
-                width="150%">
-              <template slot-scope="scope">
-                {{ scope.row.desc }}
-             </template>
-            </el-table-column>
-            <el-table-column
-                prop="pass_rate"
-                label="通过率"
-                width="130%">
-              <template slot-scope="scope">
-                {{ "通过率：" + scope.row.pass_rate + "%" }}
-              </template>
-            </el-table-column>
-            <el-table-column>
-              <template slot-scope="scope">
-                <el-button icon="el-icon-edit" size="mini"></el-button>
-              </template>
-            </el-table-column>
-          </el-table>
+          <div v-if="item.platform_list">
+            <el-table
+                stripe
+                :show-header="false"
+                :data="item.platform_list"
+                style="width: 100%">
+              <el-table-column
+                  prop="desc"
+                  label="描述"
+                  width="150%">
+                <template slot-scope="scope">
+                  {{ scope.row.desc }}
+                </template>
+              </el-table-column>
+              <el-table-column
+                  prop="pass_rate"
+                  label="通过率"
+                  width="130%">
+                <template slot-scope="scope">
+                  {{ "通过率：" + scope.row.pass_rate + "%" }}
+                </template>
+              </el-table-column>
+              <el-table-column>
+                <template slot-scope="scope">
+                  <el-button icon="el-icon-edit" size="mini"></el-button>
+                </template>
+              </el-table-column>
+            </el-table>
+          </div>
+          <div style="margin-top: 2%">
+            <el-button style="border: 1px dashed #c6c6c6; width: 100%" icon="el-icon-plus" size="mini"></el-button>
+          </div>
         </el-collapse-item>
       </el-collapse>
     </div>

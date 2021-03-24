@@ -1,6 +1,5 @@
 <template>
     <el-table
-        v-loading="loading"
         :data="bugData"
         border
         width="100%"
@@ -94,7 +93,6 @@
 import axios from "axios";
 
 export default {
-  // props: ["bugData"],
   props: {
     bugData: {
       default: null
@@ -105,7 +103,6 @@ export default {
   },
   data() {
     return {
-      loading: true,
       dataColumn: [],
       tableHeight: 50,
       categoryListData: [],
@@ -126,7 +123,6 @@ export default {
         for (let i=0;i<res.data.data.length;i++) {
           this.categoryShowData[res.data.data[i]['categoryId']] = res.data.data[i]['categoryName']
         }
-        this.loading = false
       })
     },
     editBugCategory(params) {
