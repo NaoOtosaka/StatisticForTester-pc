@@ -1,17 +1,17 @@
 <template>
-  <el-card style="width: 100%" class="box-card">
+  <el-card style="width: 100%; height: 400px;overflow-y: auto;overflow-x: hidden;" class="box-card">
     <div slot="header" class="clearfix">
-      <span>测试阶段通过率</span>
+      <span>阶段通过率汇总</span>
     </div>
-    <div>
-      <el-collapse accordion>
-        <el-collapse-item v-model="item.phase_id" v-for="item in this.platformListData" :title="item.plan_name">
+    <div class="text item">
+      <el-collapse>
+        <el-collapse-item v-for="item in this.platformListData" :title="item.plan_name">
           <div>
             <el-table
                 empty-text="点击下方新增细分条目"
                 :show-header="false"
                 :data="item.platform_list"
-                style="width: 100%">
+                style="width: 100%; height: 100%">
               <el-table-column
                   fixed
                   prop="desc"
@@ -101,5 +101,19 @@ export default {
 </script>
 
 <style scoped>
+::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+  background-color: #c7c7c7;
+}
 
+::-webkit-scrollbar-thumb {
+  border-radius: 20px;
+  background-color: #878787;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 20px;
+  background-color: #cecece;
+}
 </style>

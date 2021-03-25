@@ -67,9 +67,6 @@ export default {
         this.changeDialogStatus()
       })
     }
-  },
-  mounted() {
-    console.log(this.phaseId)
   }
 }
 </script>
