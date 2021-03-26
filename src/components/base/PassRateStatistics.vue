@@ -5,12 +5,12 @@
     </div>
     <div class="text item">
       <el-collapse>
-        <el-collapse-item v-for="item in this.platformListData" :title="item.plan_name">
+        <el-collapse-item v-for="item in this.platformListData" :title="item.planName">
           <div>
             <el-table
                 empty-text="点击下方新增细分条目"
                 :show-header="false"
-                :data="item.platform_list"
+                :data="item.platformList"
                 style="width: 100%; height: 100%">
               <el-table-column
                   fixed
@@ -22,18 +22,33 @@
                 </template>
               </el-table-column>
               <el-table-column
-                  prop="pass_rate"
+                  prop="passRate"
                   label="通过率">
                 <template slot-scope="scope">
-                  {{ "通过率：" + scope.row.pass_rate + "%" }}
+                  {{ "通过率:" + scope.row.passRate + "%" }}
                 </template>
               </el-table-column>
               <el-table-column
                   fixed="right"
-                  width="70%"
+                  width="80%"
                   label="通过率">
                 <template slot-scope="scope">
-                  <el-button style="border: none" icon="el-icon-edit" size="mini"></el-button>
+                  <el-button
+                      style="border: none; padding: 7px 5px"
+                      icon="el-icon-edit"
+                      size="mini"
+                      @click="showEditDialog(
+                          scope.row.platformId,
+                          scope.row.desc,
+                          scope.row.passRate)"></el-button>
+                  <el-button
+                      style="border: none; padding: 7px 5px"
+                      icon="el-icon-delete"
+                      size="mini"
+                      @click="showEditDialog(
+                          scope.row.platformId,
+                          scope.row.desc,
+                          scope.row.passRate)"></el-button>
                 </template>
               </el-table-column>
             </el-table>
@@ -43,7 +58,8 @@
                 style="border: 1px dashed #c6c6c6; width: 100%"
                 icon="el-icon-plus"
                 size="mini"
-                @click="showCreateDialog(item.phase_id)"></el-button>
+                @click="showCreateDialog(item.phaseId)"
+            ></el-button>
           </div>
         </el-collapse-item>
         <div>
@@ -51,7 +67,18 @@
               :projectId="projectId"
               :phaseId="phaseId"
               :createDialogVisible="createDialogVisible"
-              v-on:sendDialogStatus="getCreateDialogStatus"/>
+              v-on:sendDialogStatus="getCreateDialogStatus"
+              v-on:updatePlatformList="updatePlatformList"/>
+        </div>
+        <div>
+          <edit-platform
+              :projectId="projectId"
+              :platformId="platformId"
+              :desc="desc"
+              :passRate="passRate"
+              :editDialogVisible="editDialogVisible"
+              v-on:sendDialogStatus="getEditDialogStatus"
+              v-on:updatePlatformList="updatePlatformList"/>
         </div>
       </el-collapse>
     </div>
@@ -60,10 +87,12 @@
 
 <script>
 import addPlatform from "@/components/dialog/addPlatform";
+import editPlatform from "@/components/dialog/editPlatform";
 
 export default {
   components: {
     addPlatform,
+    editPlatform
   },
   props: [
     'projectId'
@@ -71,6 +100,9 @@ export default {
   data() {
     return {
       phaseId: null,
+      platformId: null,
+      desc: null,
+      passRate: null,
       editDialogVisible: false,
       createDialogVisible: false,
       platformListData: []
@@ -80,6 +112,12 @@ export default {
     showCreateDialog(phaseId) {
       this.createDialogVisible = true
       this.phaseId = phaseId
+    },
+    showEditDialog(platformId, desc, passRate) {
+      this.editDialogVisible = true
+      this.platformId = platformId
+      this.desc = desc
+      this.passRate = passRate
     },
     platformList(){
       // 阶段细分列表获取
@@ -92,6 +130,12 @@ export default {
     },
     getCreateDialogStatus(createDialogVisible) {
       this.createDialogVisible = !createDialogVisible
+    },
+    getEditDialogStatus(editDialogVisible) {
+      this.editDialogVisible = !editDialogVisible
+    },
+    updatePlatformList() {
+      this.platformList()
     }
   },
   mounted() {
