@@ -45,10 +45,7 @@
                       style="border: none; padding: 7px 5px"
                       icon="el-icon-delete"
                       size="mini"
-                      @click="showEditDialog(
-                          scope.row.platformId,
-                          scope.row.desc,
-                          scope.row.passRate)"></el-button>
+                      @click="openDeleteMessageBox(scope.row.platformId)"></el-button>
                 </template>
               </el-table-column>
             </el-table>
@@ -126,6 +123,44 @@ export default {
         method: "get"
       }).then(res => {
         this.platformListData = res.data.data
+      })
+    },
+    openDeleteMessageBox(platformId) {
+      this.$confirm('确认删除吗?', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.deletePlatformInfo(platformId)
+      })
+    },
+    deletePlatformInfo(platformId) {
+      // 参数封装
+      let projectParams = new URLSearchParams()
+
+      projectParams.append('platformId', platformId)
+
+      // 接口请求
+      this.axios({
+        url: "/api/v1/project/" + this.projectId + "/phase_platform",
+        method: "delete",
+        params: projectParams
+      }).then(res => {
+        // 接口反馈
+        if(res.data.status === 1){
+          this.$message({
+            message: '删除成功',
+            type: 'success'
+          })
+        }else{
+          this.$message.error(res.data.msg)
+        }
+        // 更新表渲染
+        this.updatePlatformList()
+        // 关闭弹窗
+        this.changeDialogStatus()
+        // 初始化表单数据
+        this.initFormData()
       })
     },
     getCreateDialogStatus(createDialogVisible) {
