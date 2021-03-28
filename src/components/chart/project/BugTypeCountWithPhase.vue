@@ -53,7 +53,8 @@ export default {
             {
               name: this.typeList[i],
               type: 'line',
-              data: countList
+              data: countList,
+              smooth: true
             },
         )
       }
@@ -112,6 +113,7 @@ export default {
     }
   },
   mounted() {
+    console.log(this.data)
     this.getBugCount()
     this.myResize()
   },
