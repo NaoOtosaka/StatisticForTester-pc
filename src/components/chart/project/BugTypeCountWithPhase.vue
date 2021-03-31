@@ -87,8 +87,16 @@ export default {
           containLabel: true
         },
         toolbox: {
+          show: true,
+          orient: 'vertical',
+          left: 'right',
+          top: 'center',
           feature: {
-            saveAsImage: {}
+            mark: {show: true},
+            dataView: {show: true, readOnly: false},
+            magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+            restore: {show: true},
+            saveAsImage: {show: true}
           }
         },
         xAxis: {

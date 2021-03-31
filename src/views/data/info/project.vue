@@ -7,7 +7,7 @@
     <br>
     <el-card style="width: 100%" class="box-card">
       <h2>
-        测试通过率趋势统计
+        测试通过率统计
       </h2>
       <div>
         <PassRateStatistics :projectId="this.$route.query.projectId" style="width: 25%;margin-left: 1%"/>

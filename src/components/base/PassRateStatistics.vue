@@ -1,10 +1,14 @@
 <template>
   <el-card style="width: 100%; height: 400px;overflow-y: auto;overflow-x: hidden;" class="box-card">
     <div slot="header" class="clearfix">
-      <span>阶段通过率汇总</span>
+      <span style="float: left">阶段通过率汇总</span>
+      <el-button
+          style="float: right; padding: 3px 0"
+          type="text"
+          @click="showTagManagerDialog">细分标签编辑</el-button>
     </div>
     <div class="text item">
-      <el-collapse>
+      <el-collapse accordion>
         <el-collapse-item v-for="item in this.platformListData" :title="item.planName">
           <div>
             <el-table
@@ -31,7 +35,7 @@
               <el-table-column
                   fixed="right"
                   width="80%"
-                  label="通过率">
+                  label="操作">
                 <template slot-scope="scope">
                   <el-button
                       style="border: none; padding: 7px 5px"
@@ -77,6 +81,12 @@
               v-on:sendDialogStatus="getEditDialogStatus"
               v-on:updatePlatformList="updatePlatformList"/>
         </div>
+        <div>
+          <platformTagManager
+              :projectId="projectId"
+              :TagManagerDialogVisible="TagManagerDialogVisible"
+              v-on:sendDialogStatus="getTagManagerDialogStatus"/>
+        </div>
       </el-collapse>
     </div>
   </el-card>
@@ -85,11 +95,13 @@
 <script>
 import addPlatform from "@/components/dialog/addPlatform";
 import editPlatform from "@/components/dialog/editPlatform";
+import platformTagManager from "@/components/dialog/platformTagManager";
 
 export default {
   components: {
     addPlatform,
-    editPlatform
+    editPlatform,
+    platformTagManager
   },
   props: [
     'projectId'
@@ -102,6 +114,7 @@ export default {
       passRate: null,
       editDialogVisible: false,
       createDialogVisible: false,
+      TagManagerDialogVisible: false,
       platformListData: []
     }
   },
@@ -115,6 +128,9 @@ export default {
       this.platformId = platformId
       this.desc = desc
       this.passRate = passRate
+    },
+    showTagManagerDialog() {
+      this.TagManagerDialogVisible = true
     },
     platformList(){
       // 阶段细分列表获取
@@ -168,6 +184,9 @@ export default {
     },
     getEditDialogStatus(editDialogVisible) {
       this.editDialogVisible = !editDialogVisible
+    },
+    getTagManagerDialogStatus(TagManagerDialogVisible) {
+      this.TagManagerDialogVisible = !TagManagerDialogVisible
     },
     updatePlatformList() {
       this.platformList()
