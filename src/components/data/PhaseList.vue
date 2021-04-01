@@ -76,7 +76,10 @@ export default {
               this.bugData[req_num[index]] = item['data']['data']
               this.bugCount[req_num[index]] = item['data']['data'].length
             })
-        this.$forceUpdate()
+            setTimeout(() => {
+              this.$forceUpdate()
+            }, 2000)
+
           })
       )
     },

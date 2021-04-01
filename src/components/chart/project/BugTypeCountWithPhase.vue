@@ -87,6 +87,7 @@ export default {
           containLabel: true
         },
         toolbox: {
+          showTitle: true,
           show: true,
           orient: 'vertical',
           left: 'right',
@@ -94,7 +95,7 @@ export default {
           feature: {
             mark: {show: true},
             dataView: {show: true, readOnly: false},
-            magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+            magicType: {show: true, type: ['line', 'bar', 'tiled']},
             restore: {show: true},
             saveAsImage: {show: true}
           }
@@ -121,8 +122,8 @@ export default {
     }
   },
   mounted() {
-    console.log(this.data)
-    this.getBugCount()
+    // console.log(this.data)
+    setTimeout(this.getBugCount, 1000)
     this.myResize()
   },
   watch: {

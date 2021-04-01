@@ -38,11 +38,6 @@ export default {
       )
     },
     getData(res) {
-      // // 初始化数据项
-      // this.passRateData = []
-      // this.planList = []
-      // this.tagList = []
-
       this.planList = res[0].data.data.planList
       this.tagList = res[0].data.data.tagList
       this.passRateData=[]
@@ -92,18 +87,7 @@ export default {
         align: 'left',
         verticalAlign: 'middle',
         position: 'insideBottom',
-        distance: 15,
-        onChange: function () {
-          let labelOption = {
-            normal: {
-              rotate: app.config.rotate,
-              align: app.config.align,
-              verticalAlign: app.config.verticalAlign,
-              position: app.config.position,
-              distance: app.config.distance
-            }
-          }
-        }
+        distance: 15
       }
 
       let labelOption = {
@@ -113,7 +97,7 @@ export default {
         align: app.config.align,
         verticalAlign: app.config.verticalAlign,
         rotate: app.config.rotate,
-        formatter: '{c}%',
+        formatter: '{a} - {c}%',
         fontSize: 16,
         rich: {
           name: {
@@ -170,13 +154,13 @@ export default {
         },
         toolbox: {
           show: true,
-          orient: 'vertical',
-          left: 'right',
-          top: 'center',
+          orient: 'horizontal',
+          left: '3%',
+          top: 'top',
           feature: {
             mark: {show: true},
             dataView: {show: true, readOnly: false},
-            magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+            // magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
             restore: {show: true},
             saveAsImage: {show: true}
           }
@@ -187,7 +171,8 @@ export default {
           data: this.planList
         },
         yAxis: {
-          type: 'value'
+          type: 'value',
+          max: 100
         },
         series: this.passRateData
       };

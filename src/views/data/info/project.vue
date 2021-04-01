@@ -5,7 +5,7 @@
     </el-page-header>
     <br>
     <br>
-    <el-card style="width: 100%" class="box-card">
+    <el-card style="width: 100%;padding: 1% 0 1% 0" class="box-card">
       <h2>
         测试通过率统计
       </h2>
@@ -23,7 +23,7 @@
       </div>
     </el-card>
     <br>
-    <el-card style="width: 100%" class="box-card">
+    <el-card style="width: 100%;padding: 1% 0 1% 0" class="box-card">
       <h2>
         基础异常数据统计
       </h2>
