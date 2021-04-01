@@ -22,7 +22,7 @@
                   label="描述"
                   show-overflow-tooltip>
                 <template slot-scope="scope">
-                  {{ scope.row.desc }}
+                  {{ scope.row.tagName }}
                 </template>
               </el-table-column>
               <el-table-column
@@ -44,7 +44,9 @@
                       @click="showEditDialog(
                           scope.row.platformId,
                           scope.row.desc,
-                          scope.row.passRate)"></el-button>
+                          scope.row.passRate,
+                          scope.row.tagId,
+                          scope.row.tagName)"></el-button>
                   <el-button
                       style="border: none; padding: 7px 5px"
                       icon="el-icon-delete"
@@ -69,23 +71,27 @@
               :phaseId="phaseId"
               :createDialogVisible="createDialogVisible"
               v-on:sendDialogStatus="getCreateDialogStatus"
-              v-on:updatePlatformList="updatePlatformList"/>
+              v-on:updatePlatformList="updatePlatformList"
+              v-on:refreshChart="refreshChart"/>
         </div>
         <div>
           <edit-platform
               :projectId="projectId"
               :platformId="platformId"
-              :desc="desc"
+              :tagId="tagId"
+              :tagName="tagName"
               :passRate="passRate"
               :editDialogVisible="editDialogVisible"
               v-on:sendDialogStatus="getEditDialogStatus"
-              v-on:updatePlatformList="updatePlatformList"/>
+              v-on:updatePlatformList="updatePlatformList"
+              v-on:refreshChart="refreshChart"/>
         </div>
         <div>
           <platformTagManager
               :projectId="projectId"
               :TagManagerDialogVisible="TagManagerDialogVisible"
-              v-on:sendDialogStatus="getTagManagerDialogStatus"/>
+              v-on:sendDialogStatus="getTagManagerDialogStatus"
+              v-on:refreshChart="refreshChart"/>
         </div>
       </el-collapse>
     </div>
@@ -110,24 +116,33 @@ export default {
     return {
       phaseId: null,
       platformId: null,
+      tagId: null,
+      tagName: null,
       desc: null,
       passRate: null,
       editDialogVisible: false,
       createDialogVisible: false,
       TagManagerDialogVisible: false,
-      platformListData: []
+      platformListData: [],
+      refreshTag: true
     }
   },
   methods: {
+    refreshChart() {
+      this.refreshTag = !this.refreshTag
+      this.$emit('refreshChart', this.refreshTag)
+    },
     showCreateDialog(phaseId) {
       this.createDialogVisible = true
       this.phaseId = phaseId
     },
-    showEditDialog(platformId, desc, passRate) {
+    showEditDialog(platformId, desc, passRate, tagId, tagName) {
       this.editDialogVisible = true
       this.platformId = platformId
       this.desc = desc
       this.passRate = passRate
+      this.tagId = tagId
+      this.tagName = tagName
     },
     showTagManagerDialog() {
       this.TagManagerDialogVisible = true
@@ -139,6 +154,7 @@ export default {
         method: "get"
       }).then(res => {
         this.platformListData = res.data.data
+        console.log(this.platformListData)
       })
     },
     openDeleteMessageBox(platformId) {
@@ -148,6 +164,7 @@ export default {
         type: 'warning'
       }).then(() => {
         this.deletePlatformInfo(platformId)
+        this.refreshChart()
       })
     },
     deletePlatformInfo(platformId) {

@@ -78,8 +78,7 @@
       ></el-button>
     </div>
     <span slot="footer" class="dialog-footer">
-      <el-button @click="changeDialogStatus">取 消</el-button>
-      <el-button type="primary">确 定</el-button>
+      <el-button @click="changeDialogStatus">关闭</el-button>
     </span>
   </el-dialog>
 </template>
@@ -171,6 +170,8 @@ export default {
         this.changeEditStatus()
         // 更新表渲染
         this.initData()
+        // charts刷新
+        this.$emit('refreshChart')
       })
     },
     openDeleteMessageBox(tagId) {
@@ -205,6 +206,8 @@ export default {
         }
         // 更新表渲染
         this.updatePlatformTagList()
+        // charts刷新
+        this.$emit('refreshChart')
       })
     },
     updatePlatformTagList() {
@@ -242,6 +245,8 @@ export default {
         this.initData()
         // 更新创建标签状态
         this.changeCreateStatus()
+        // charts刷新
+        this.$emit('refreshChart')
       })
     },
   },

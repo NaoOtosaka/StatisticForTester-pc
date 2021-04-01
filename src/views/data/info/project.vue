@@ -10,7 +10,16 @@
         测试通过率统计
       </h2>
       <div>
-        <PassRateStatistics :projectId="this.$route.query.projectId" style="width: 25%;margin-left: 1%"/>
+        <PassRateStatistics
+            v-on:refreshChart="refreshChart"
+            :projectId="this.$route.query.projectId" 
+            style="width: 25%;margin-left: 1%;float: left"/>
+      </div>
+      <div>
+        <PassRateWithProject
+            :refreshTag="this.refreshTag"
+            :projectId="this.$route.query.projectId" 
+            style="width: 70%;margin-left: 2%;float:left;"/>
       </div>
     </el-card>
     <br>
@@ -28,9 +37,9 @@
       <div>
         <BugTypeCountWithPhase :projectId="this.$route.query.projectId"/>
       </div>
-      <div>
-        <BugCountByDate :projectId="this.$route.query.projectId"/>
-      </div>
+<!--      <div>-->
+<!--        <BugCountByDate :projectId="this.$route.query.projectId"/>-->
+<!--      </div>-->
     </el-card>
     <br>
     <el-card style="width: 100%;" class="box-card">
@@ -56,6 +65,7 @@ import PhaseList from "@/components/data/PhaseList";
 import BugTypeCountWithPhase from "@/components/chart/project/BugTypeCountWithPhase";
 import BugCountByDate from "@/components/chart/project/BugCountByDate";
 import PassRateStatistics from "@/components/base/PassRateStatistics";
+import PassRateWithProject from "@/components/chart/project/PassRateWithProject";
 
 export default {
   components: {
@@ -66,14 +76,19 @@ export default {
     PhaseList,
     BugTypeCountWithPhase,
     BugCountByDate,
-    PassRateStatistics
+    PassRateStatistics,
+    PassRateWithProject
   },
   data() {
     return {
-      projectData: []
+      projectData: [],
+      refreshTag: null
     }
   },
   methods: {
+    refreshChart(refreshTag) {
+      this.refreshTag = refreshTag
+    },
     projectInfo(){
       this.axios({
         url: "/api/v1/project",
