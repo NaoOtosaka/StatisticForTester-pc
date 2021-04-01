@@ -20,7 +20,7 @@
           label="标签名"
           show-overflow-tooltip>
         <template slot-scope="scope">
-        <span v-if="tagEditTag === false || editIndex !== scope.row.id" style="width: 95%">
+        <span v-if="tagEditTag === false && editIndex !== scope.row.id" style="width: 95%">
           {{ scope.row.name }}
         </span>
         <el-input
@@ -29,6 +29,12 @@
             style="width: 95%;"
             :placeholder="scope.row.name">
         </el-input>
+          <el-input
+              v-if="tagCreateTag && editIndex === scope.row.id"
+              v-model="scope.row.name"
+              style="width: 95%;"
+              :placeholder="scope.row.name">
+          </el-input>
         </template>
       </el-table-column>
       <el-table-column
@@ -37,7 +43,7 @@
           label="操作">
         <template slot-scope="scope">
           <el-button
-              v-if="tagEditTag === false"
+              v-if="tagEditTag === false && tagCreateTag === false"
               style="border: none; padding: 7px 5px"
               icon="el-icon-edit"
               size="mini"
@@ -47,13 +53,19 @@
               style="border: none; padding: 7px 5px"
               icon="el-icon-check"
               size="mini"
-              @click="changeEditStatus(scope.row.id)"></el-button>
+              @click="editPlatformTag(scope.row.id, scope.row.name)"></el-button>
           <el-button
-              v-if="tagEditTag === false"
+              v-if="tagCreateTag && editIndex === scope.row.id"
+              style="border: none; padding: 7px 5px"
+              icon="el-icon-check"
+              size="mini"
+              @click="addPlatformTag(scope.row.name)"></el-button>
+          <el-button
+              v-if="tagEditTag === false && tagCreateTag === false"
               style="border: none; padding: 7px 5px"
               icon="el-icon-delete"
               size="mini"
-              @click="openDeleteMessageBox(scope.row.platformId)"></el-button>
+              @click="openDeleteMessageBox(scope.row.id)"></el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -62,7 +74,7 @@
           style="border: 1px dashed #c6c6c6; width: 100%"
           icon="el-icon-plus"
           size="mini"
-          @click="showCreateDialog(item.phaseId)"
+          @click="addBlankTagData()"
       ></el-button>
     </div>
     <span slot="footer" class="dialog-footer">
@@ -84,11 +96,16 @@ export default {
       platformListTag: true,
       tagListData: [],
       tagEditTag: false,
+      tagCreateTag: false,
       editIndex: -1
     }
   },
   methods: {
     changeDialogStatus() {
+      // 初始化弹窗状态
+      this.tagCreateTag = false
+      this.tagEditTag = false
+      this.editIndex = -1
       // 关闭弹窗
       this.$emit('sendDialogStatus', this.TagManagerDialogVisible)
     },
@@ -124,7 +141,11 @@ export default {
       this.tagEditTag = !this.tagEditTag
       this.editIndex = index
     },
-    editTagInfo(tagId, tagName) {
+    changeCreateStatus() {
+      this.tagCreateTag = !this.tagCreateTag
+      this.editIndex = null
+    },
+    editPlatformTag(tagId, tagName) {
       // 参数封装
       let projectParams = new URLSearchParams()
 
@@ -146,41 +167,83 @@ export default {
         }else{
           this.$message.error(res.data.msg)
         }
-        // 初始化表单数据
+        // 切换编辑态
+        this.changeEditStatus()
+        // 更新表渲染
         this.initData()
       })
     },
-    // addPlatformInfo(desc, passRate) {
-    //   // 参数封装
-    //   let projectParams = new URLSearchParams()
-    //
-    //   passRate = passRate.toFixed(2)
-    //
-    //   projectParams.append('phaseId', this.phaseId)
-    //   projectParams.append('desc', desc)
-    //   projectParams.append('passRate', passRate)
-    //
-    //   // 接口请求
-    //   this.axios({
-    //     url: "/api/v1/project/" + this.projectId + "/phase_platform",
-    //     method: "post",
-    //     params: projectParams
-    //   }).then(res => {
-    //     // 接口反馈
-    //     if(res.data.status === 1){
-    //       this.$message({
-    //         message: '添加成功',
-    //         type: 'success'
-    //       })
-    //     }else{
-    //       this.$message.error(res.data.msg)
-    //     }
-    //     // 更新表渲染
-    //     this.updatePlatformList()
-    //     // 关闭弹窗
-    //     this.changeDialogStatus()
-    //   })
-    // },
+    openDeleteMessageBox(tagId) {
+      this.$confirm('确认删除吗?', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.deletePlatformTag(tagId)
+      })
+    },
+    deletePlatformTag(tagId) {
+      // 参数封装
+      let projectParams = new URLSearchParams()
+
+      projectParams.append('tagId', tagId)
+
+      // 接口请求
+      this.axios({
+        url: "/api/v1/project/" + this.projectId + "/platform_tag",
+        method: "delete",
+        params: projectParams
+      }).then(res => {
+        // 接口反馈
+        if(res.data.status === 1){
+          this.$message({
+            message: '删除成功',
+            type: 'success'
+          })
+        }else{
+          this.$message.error(res.data.msg)
+        }
+        // 更新表渲染
+        this.updatePlatformTagList()
+      })
+    },
+    updatePlatformTagList() {
+      this.initData()
+    },
+    addBlankTagData() {
+      this.tagListData.push({
+        "id": null,
+        "name": ''
+      })
+      this.changeCreateStatus()
+    },
+    addPlatformTag(name) {
+      // 参数封装
+      let projectParams = new URLSearchParams()
+
+      projectParams.append('tagName', name)
+
+      // 接口请求
+      this.axios({
+        url: "/api/v1/project/" + this.projectId + "/platform_tag",
+        method: "post",
+        params: projectParams
+      }).then(res => {
+        // 接口反馈
+        if(res.data.status === 1){
+          this.$message({
+            message: '添加成功',
+            type: 'success'
+          })
+        }else{
+          this.$message.error(res.data.msg)
+        }
+        // 更新表渲染
+        this.initData()
+        // 更新创建标签状态
+        this.changeCreateStatus()
+      })
+    },
   },
   mounted() {
     this.initData()
