@@ -53,6 +53,19 @@ export default {
           left: 'center',
           text: '项目BUG分类占比',
         },
+        toolbox: {
+          show: true,
+          orient: 'vertical',
+          left: '3%',
+          top: 'top',
+          feature: {
+            mark: {show: true},
+            dataView: {show: true, readOnly: false},
+            // magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+            restore: {show: true},
+            saveAsImage: {show: true}
+          }
+        },
         tooltip: {
           trigger: 'item'
         },
