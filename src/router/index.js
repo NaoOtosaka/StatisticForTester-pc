@@ -27,6 +27,11 @@ const routes = [
         path: 'upload',
         name: 'csv上传',
         component: () => import('../views/dashboard/upload')
+      },
+      {
+        path: 'test',
+        name: '词云',
+        component: () => import('../views/dashboard/test')
       }
     ]
   },
