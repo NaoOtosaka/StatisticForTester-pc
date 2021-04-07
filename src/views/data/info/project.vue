@@ -25,6 +25,15 @@
     <br>
     <el-card style="width: 100%;padding: 1% 0 1% 0" class="box-card">
       <h2>
+        异常模块统计
+      </h2>
+      <div>
+        <WordCloud style="float: right"/>
+      </div>
+    </el-card>
+    <br>
+    <el-card style="width: 100%;padding: 1% 0 1% 0" class="box-card">
+      <h2>
         基础异常数据统计
       </h2>
       <br>
@@ -66,6 +75,7 @@ import BugTypeCountWithPhase from "@/components/chart/project/BugTypeCountWithPh
 import BugCountByDate from "@/components/chart/project/BugCountByDate";
 import PassRateStatistics from "@/components/base/PassRateStatistics";
 import PassRateWithProject from "@/components/chart/project/PassRateWithProject";
+import WordCloud from "@/components/tools/WordCloud";
 
 export default {
   components: {
@@ -77,7 +87,8 @@ export default {
     BugTypeCountWithPhase,
     BugCountByDate,
     PassRateStatistics,
-    PassRateWithProject
+    PassRateWithProject,
+    WordCloud
   },
   data() {
     return {
