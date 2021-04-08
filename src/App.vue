@@ -60,11 +60,11 @@ export default {
             routePath: "/dashboard/upload",
             icon: 'el-icon-upload2'
           },
-          {
-            name: "词云",
-            routePath: "/dashboard/test",
-            icon: 'el-icon-upload2'
-          }
+          // {
+          //   name: "词云",
+          //   routePath: "/dashboard/test",
+          //   icon: 'el-icon-upload2'
+          // }
         ],
         [
           {

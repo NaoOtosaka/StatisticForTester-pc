@@ -53,7 +53,8 @@
       </div>
       <div>
         <WordCloud
-            style="float: right; width: 55%"/>
+            style="float: right; width: 55%"
+            :projectId="this.$route.query.projectId"/>
       </div>
     </el-card>
     <br>

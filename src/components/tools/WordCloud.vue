@@ -10,18 +10,19 @@
 
 <script>
 export default {
+  props:[
+    'projectId'
+  ],
   data() {
     return {
-      textarea: '',
       pic: "",
-      pageTitle: 'Flask Vue Word Cloud',
     }
   },
   methods: {
     getWordCloud() {
       this.axios.get("/api/v1/tools/wordcloud", {
         params:{
-          projectId: 2
+          projectId: this.projectId
         }
       }).then(
           res => {
