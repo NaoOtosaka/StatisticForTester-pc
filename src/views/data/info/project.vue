@@ -25,15 +25,6 @@
     <br>
     <el-card style="width: 100%;padding: 1% 0 1% 0" class="box-card">
       <h2>
-        异常模块统计
-      </h2>
-      <div>
-        <WordCloud style="float: right"/>
-      </div>
-    </el-card>
-    <br>
-    <el-card style="width: 100%;padding: 1% 0 1% 0" class="box-card">
-      <h2>
         基础异常数据统计
       </h2>
       <br>
@@ -49,6 +40,21 @@
 <!--      <div>-->
 <!--        <BugCountByDate :projectId="this.$route.query.projectId"/>-->
 <!--      </div>-->
+    </el-card>
+    <br>
+    <el-card style="width: 100%;padding: 1% 0 1% 0" class="box-card">
+      <h2>
+        异常模块统计
+      </h2>
+      <div>
+        <ModelList
+            style="width: 41%;height: 300px;margin-left: 1%;float: left"
+            :data="this.modelData"/>
+      </div>
+      <div>
+        <WordCloud
+            style="float: right; width: 55%"/>
+      </div>
     </el-card>
     <br>
     <el-card style="width: 100%;" class="box-card">
@@ -76,6 +82,7 @@ import BugCountByDate from "@/components/chart/project/BugCountByDate";
 import PassRateStatistics from "@/components/base/PassRateStatistics";
 import PassRateWithProject from "@/components/chart/project/PassRateWithProject";
 import WordCloud from "@/components/tools/WordCloud";
+import ModelList from "@/components/data/ModelList";
 
 export default {
   components: {
@@ -88,11 +95,13 @@ export default {
     BugCountByDate,
     PassRateStatistics,
     PassRateWithProject,
-    WordCloud
+    WordCloud,
+    ModelList
   },
   data() {
     return {
       projectData: [],
+      modelData: [],
       refreshTag: null
     }
   },
@@ -111,6 +120,18 @@ export default {
         this.projectData = res.data.data
       })
     },
+    getModelList() {
+      // 接口请求
+      this.axios({
+        url: "/api/v1/project/" + this.$route.query.projectId + "/model_count",
+        method: "get"
+      }).then(res => {
+        // 接口反馈
+        if(res.data.status === 1){
+          this.modelData = res.data.data
+        }
+      })
+    },
     goBack() {
       this.$router.go(-1)
     },
@@ -120,6 +141,7 @@ export default {
   },
   mounted() {
     this.projectInfo()
+    this.getModelList()
   }
 };
 </script>
