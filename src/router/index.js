@@ -81,7 +81,7 @@ const routes = [
     children: [
       {
         path:'/',
-        redirect:'project'
+        redirect:'bug'
       },
       {
         path: 'project',
@@ -114,6 +114,41 @@ const routes = [
     path: '/setting',
     name: '设置',
     component: () => import('../views/setting/index')
+  },
+  {
+    path: '/summary',
+    component: () => import('../views/summary/index'),
+    children: [
+      {
+        path:'/',
+        redirect:'compatible'
+      },
+      {
+        path: 'compatible',
+        name: '兼容性异常记录',
+        component: () => import('../views/summary/compatible')
+      },
+      // {
+      //   path: 'developer',
+      //   name: '开发图表',
+      //   component: () => import('../views/chart/developer')
+      // },
+      {
+        path: 'tester',
+        name: '测试图表',
+        component: () => import('../views/chart/tester')
+      },
+      // {
+      //   path: 'planner',
+      //   name: '策划图表',
+      //   component: () => import('../views/chart/planner')
+      // },
+      {
+        path: 'bug',
+        name: 'BUG图表',
+        component: () => import('../views/chart/bug')
+      }
+    ]
   },
 ]
 

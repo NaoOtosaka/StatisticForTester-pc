@@ -72,28 +72,33 @@ export default {
             routePath: "/data/project",
             icon: 'el-icon-bank-card'
           },
-          {
-            name: "开发",
-            routePath: "/data/developer",
-            icon: 'el-icon-user'
-          },
-          {
-            name: "测试",
-            routePath: "/data/tester",
-            icon: 'el-icon-user'
-          },
+          // {
+          //   name: "开发",
+          //   routePath: "/data/developer",
+          //   icon: 'el-icon-user'
+          // },
+          // {
+          //   name: "测试",
+          //   routePath: "/data/tester",
+          //   icon: 'el-icon-user'
+          // },
           // {
           //   name: "策划",
           //   routePath: "/data/planner",
           //   icon: 'el-icon-user'
           // },
-          {
-            name: "BUG",
-            routePath: "/data/bug",
-            icon: 'el-icon-cpu'
-          },
+          // {
+          //   name: "BUG",
+          //   routePath: "/data/bug",
+          //   icon: 'el-icon-cpu'
+          // },
         ],
         [
+          {
+            name: "BUG图表",
+            routePath: "/chart/bug",
+            icon: 'el-icon-pie-chart'
+          },
           {
             name: "项目图表",
             routePath: "/chart/project",
@@ -104,21 +109,16 @@ export default {
           //   routePath: "/chart/developer",
           //   icon: 'el-icon-pie-chart'
           // },
-          {
-            name: "测试图表",
-            routePath: "/chart/tester",
-            icon: 'el-icon-pie-chart'
-          },
+          // {
+          //   name: "测试图表",
+          //   routePath: "/chart/tester",
+          //   icon: 'el-icon-pie-chart'
+          // },
           // {
           //   name: "策划图表",
           //   routePath: "/chart/planner",
           //   icon: 'el-icon-pie-chart'
           // },
-          {
-            name: "BUG图表",
-            routePath: "/chart/bug",
-            icon: 'el-icon-pie-chart'
-          },
         ],
         // [
         //   {
@@ -127,6 +127,33 @@ export default {
         //     icon: 'el-icon-setting'
         //   }
         // ],
+        [
+          {
+            name: "H5兼容性异常",
+            routePath: "/summary/compatible",
+            icon: 'el-icon-bank-card'
+          },
+          // {
+          //   name: "开发",
+          //   routePath: "/data/developer",
+          //   icon: 'el-icon-user'
+          // },
+          // {
+          //   name: "测试",
+          //   routePath: "/data/tester",
+          //   icon: 'el-icon-user'
+          // },
+          // {
+          //   name: "策划",
+          //   routePath: "/data/planner",
+          //   icon: 'el-icon-user'
+          // },
+          // {
+          //   name: "BUG",
+          //   routePath: "/data/bug",
+          //   icon: 'el-icon-cpu'
+          // },
+        ],
       ]
     }
   },

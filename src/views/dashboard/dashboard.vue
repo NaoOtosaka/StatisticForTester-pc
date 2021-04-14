@@ -26,11 +26,9 @@
      - 仪表盘展示填充 <br>
      - 站点样式翻新优化
   </div>
-<!--  <bug :data="bug_data"/>-->
 </template>
 
 <script>
-import bug from "@/components/bug";
 import Banner from "@/components/base/Banner";
 
 export default {
@@ -38,7 +36,6 @@ export default {
       "navTag"
   ],
   components: {
-    bug,
     Banner
   },
   data() {

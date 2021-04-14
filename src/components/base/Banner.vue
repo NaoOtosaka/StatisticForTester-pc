@@ -41,6 +41,10 @@ export default {
           name: '图表',
           routePath: '/chart'
         },
+        {
+          name: '汇总',
+          routePath: '/summary'
+        },
         // {
         //   name: '设置',
         //   routePath: '/setting'

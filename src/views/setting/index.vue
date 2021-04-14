@@ -5,14 +5,12 @@
       <!--        纵向导航-->
     </el-aside>
     <el-main>
-      <bug :data="bug_data"/>
     </el-main>
   </el-container>
 </template>
 
 
 <script>
-import bug from "@/components/bug";
 import Banner from "@/components/base/Banner";
 
 export default {
@@ -20,7 +18,6 @@ export default {
     "navTag"
   ],
   components: {
-    bug,
     Banner
   },
   data() {
