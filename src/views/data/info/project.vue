@@ -37,9 +37,9 @@
       <div>
         <BugTypeCountWithPhase :projectId="this.$route.query.projectId"/>
       </div>
-<!--      <div>-->
-<!--        <BugCountByDate :projectId="this.$route.query.projectId"/>-->
-<!--      </div>-->
+      <div>
+        <BugCountByDate :projectId="this.$route.query.projectId"/>
+      </div>
     </el-card>
     <br>
     <el-card style="width: 100%;padding: 1% 0 1% 0" class="box-card">

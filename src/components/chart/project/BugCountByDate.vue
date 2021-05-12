@@ -121,14 +121,14 @@ export default {
           type: 'value',
           boundaryGap: [0, '100%']
         },
-        dataZoom: [{
-          type: 'inside',
-          start: 0,
-          end: 100
-        }, {
-          start: 0,
-          end: 10
-        }],
+        // dataZoom: [{
+        //   type: 'inside',
+        //   start: 0,
+        //   end: 100
+        // }, {
+        //   start: 0,
+        //   end: 10
+        // }],
         series: [
           {
             name: '新增异常',

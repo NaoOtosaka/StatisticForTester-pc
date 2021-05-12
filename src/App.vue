@@ -132,27 +132,7 @@ export default {
             name: "H5兼容性异常",
             routePath: "/summary/compatible",
             icon: 'el-icon-bank-card'
-          },
-          // {
-          //   name: "开发",
-          //   routePath: "/data/developer",
-          //   icon: 'el-icon-user'
-          // },
-          // {
-          //   name: "测试",
-          //   routePath: "/data/tester",
-          //   icon: 'el-icon-user'
-          // },
-          // {
-          //   name: "策划",
-          //   routePath: "/data/planner",
-          //   icon: 'el-icon-user'
-          // },
-          // {
-          //   name: "BUG",
-          //   routePath: "/data/bug",
-          //   icon: 'el-icon-cpu'
-          // },
+          }
         ],
       ]
     }
