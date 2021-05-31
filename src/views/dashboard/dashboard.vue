@@ -1,11 +1,16 @@
 <!--仪表盘主框架-->
 <template>
   <div style="width: 100%; height: 100%">
-    <div style="width: 100%; height: 100%">
-<!--      <div style="position: relative;margin-left: 1%;width: 75%;float: left">-->
-<!--        test-->
-<!--      </div>-->
-      <div style="position: relative;margin-left: 80%;width: 20%;float: left">
+    <div style="overflow: hidden;width: 100%; height: 100%">
+      <div style="margin-left: 1%;width: 76%;float: left">
+        <h3 style="text-align: left">项目概况</h3>
+        <el-card style="width: 100%;padding: 1% 0 1% 0;float:left;" class="box-card">
+          <div style="width: 100%">
+            <BugCountByDate :testerId="value"/>
+          </div>
+        </el-card>
+      </div>
+      <div style="margin-left: 2%;width: 20%;float: left">
         <h3 style="text-align: left">更新日志</h3>
         <el-card
             style="height: 45rem;overflow-y: scroll" class="scroll"
@@ -48,6 +53,7 @@
 <script>
 import Banner from "@/components/base/Banner";
 import Log from "@/components/base/Log"
+import BugCountByDate from "@/components/chart/tester/BugCountByDate";
 
 export default {
   props:[
@@ -55,7 +61,8 @@ export default {
   ],
   components: {
     Banner,
-    Log
+    Log,
+    BugCountByDate
   },
   data() {
     return {

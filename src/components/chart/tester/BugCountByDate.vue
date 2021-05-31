@@ -1,6 +1,6 @@
 <template>
   <div class="Echarts">
-    <div id="bugCountByDate" style="width: auto;height:400px;"></div>
+    <div id="bugCountByDate" style="width: 100rem;height:400px;"></div>
   </div>
 </template>
 
