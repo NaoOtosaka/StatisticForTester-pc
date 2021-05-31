@@ -1,14 +1,14 @@
 <!--仪表盘主框架-->
 <template>
   <div style="width: 100%; height: 100%">
-    <div style="overflow: hidden; width: 100%; height: 100%" id="lateral">
+    <div style="width: 100%; height: 100%">
 <!--      <div style="position: relative;margin-left: 1%;width: 75%;float: left">-->
 <!--        test-->
 <!--      </div>-->
       <div style="position: relative;margin-left: 80%;width: 20%;float: left">
         <h3 style="text-align: left">更新日志</h3>
         <el-card
-            style="height: 100%;overflow-y: hidden"
+            style="height: 45rem;overflow-y: scroll" class="scroll"
             body-style="margin-right: 10px;padding: 15px 10px 0 5px">
           <Log></Log>
         </el-card>
@@ -74,6 +74,30 @@ export default {
 };
 </script>
 
-<style>
 
+<style scoped>
+.scroll {
+  overflow: scroll;
+}
+/*整个滚动条样式*/
+.scroll::-webkit-scrollbar {
+  width: 4px;
+  height: 0;
+}
+/*设置滚动条上的滚动滑块样式*/
+.scroll::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+/*鼠标位于内容上时，滚动条样式*/
+.scroll:hover::-webkit-scrollbar {
+  width: 4px;
+  height: 0;
+  background: rgba(238, 238, 238, 1);
+  border-radius: 6px;
+}
+/*鼠标位于内容上时，滚动滑块样式*/
+.scroll:hover::-webkit-scrollbar-thumb {
+  background: #767676;
+  border-radius: 10px;
+}
 </style>

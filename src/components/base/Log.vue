@@ -1,6 +1,6 @@
 <template>
   <div class="block">
-    <el-timeline style="padding-inline-start: 10px;">
+    <el-timeline style="padding-inline-start: 10px">
       <el-timeline-item
           v-for="item in this.logList"
           :timestamp="item.commitTime"
