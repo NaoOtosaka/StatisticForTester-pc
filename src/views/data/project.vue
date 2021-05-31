@@ -2,7 +2,7 @@
 <template>
   <div>
     <Tabs  v-on:sendProjectCategory="test"/>
-    <ProjectList :data="bug_data"/>
+    <ProjectList :data="bug_data" :loading="loading"/>
   </div>
 </template>
 
@@ -18,7 +18,8 @@ export default {
   data() {
     return {
       bug_data: [],
-      category: 3
+      category: 3,
+      loading: true
     }
   },
   methods: {
@@ -38,7 +39,10 @@ export default {
     }
   },
   mounted() {
-    this.projectList(this.category)
+    setTimeout(() => {
+      this.projectList(this.category)
+      this.loading = false
+    }, 1000)
   }
 };
 </script>

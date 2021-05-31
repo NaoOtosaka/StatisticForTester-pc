@@ -13,7 +13,7 @@
         </div>
       </template>
       <div v-if="bugData[item.phaseId]">
-        <BugList :getChartsRef="getChartsRef" :bugData="bugData[item.phaseId]"/>
+        <BugList :getChartsRef="getChartsRef" :loading="loading" :bugData="bugData[item.phaseId]"/>
       </div>
     </el-collapse-item>
   </el-collapse>
@@ -39,6 +39,7 @@ export default {
     return {
       bugData: {},
       bugCount: {},
+      loading: true
     };
   },
   methods: {
@@ -79,7 +80,7 @@ export default {
             setTimeout(() => {
               this.$forceUpdate()
             }, 2000)
-
+            this.loading = false
           })
       )
     },

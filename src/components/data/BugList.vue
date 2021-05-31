@@ -1,5 +1,6 @@
 <template>
     <el-table
+        v-loading="loading"
         :data="bugData"
         border
         width="100%"
@@ -99,6 +100,10 @@ export default {
     },
     getChartsRef: {
       default: null
+    },
+    loading: {
+      type: Boolean,
+      default: true
     }
   },
   data() {
@@ -167,6 +172,7 @@ export default {
     }
   },
   mounted:function(){
+    // console.log(this.loading)
     this.categoryList()
     this.$nextTick(function () {
       this.tableHeight = window.innerHeight - this.$refs.table.$el.offsetTop - 50;

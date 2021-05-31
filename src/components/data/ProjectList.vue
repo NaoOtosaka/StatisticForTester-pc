@@ -1,5 +1,6 @@
 <template>
   <el-table
+      v-loading="loading"
       :data="data"
       border
       width="100%"
@@ -166,7 +167,10 @@
 import axios from "axios";
 
 export default {
-  props: ["data"],
+  props: [
+      "data",
+      "loading"
+  ],
   data() {
     return {
       dataColumn: [],
@@ -176,7 +180,7 @@ export default {
       plannerShowData: {},
       tableHeight: 50,
       docEditTag: false,
-      editIndex: -1
+      editIndex: -1,
     }
   },
   methods: {
@@ -319,7 +323,6 @@ export default {
   mounted:function(){
     this.testerList()
     this.getPlannerList()
-
     this.$nextTick(function () {
       this.tableHeight = window.innerHeight - this.$refs.table.$el.offsetTop - 50;
       // 监听窗口大小变化
