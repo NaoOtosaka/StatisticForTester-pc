@@ -81,7 +81,7 @@ const routes = [
     children: [
       {
         path:'/',
-        redirect:'bug'
+        redirect:'project'
       },
       {
         path: 'project',

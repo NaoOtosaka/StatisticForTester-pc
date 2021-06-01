@@ -94,11 +94,11 @@ export default {
           // },
         ],
         [
-          {
-            name: "BUG图表",
-            routePath: "/chart/bug",
-            icon: 'el-icon-pie-chart'
-          },
+          // {
+          //   name: "BUG图表",
+          //   routePath: "/chart/bug",
+          //   icon: 'el-icon-pie-chart'
+          // },
           {
             name: "项目图表",
             routePath: "/chart/project",

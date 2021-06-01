@@ -1,6 +1,6 @@
 <template>
   <div class="Echarts">
-    <div id="bugType" style="width: auto;height:400px;"></div>
+    <div id="bugType" style="width: auto;height:300px;"></div>
   </div>
 </template>
 
@@ -49,10 +49,10 @@ export default {
 
       // 指定图表的配置项和数据
       let option = {
-        title: {
-          left: 'center',
-          text: 'BUG类型统计'
-        },
+        // title: {
+        //   left: 'center',
+        //   text: 'BUG类型统计'
+        // },
         tooltip: {},
         series: [{
           name: '数量',

@@ -7,9 +7,12 @@
         text-color="#fff"
         active-text-color="#ffd04b"
         router>
-      <el-menu-item @click="changeNavStatus">
-        <el-button size="mini" class="el-icon-arrow-left" v-if="!isCollapse" type="info" circle></el-button>
-        <el-button size="mini" class="el-icon-arrow-right" v-else type="info" circle></el-button>
+<!--      <el-menu-item @click="changeNavStatus">-->
+<!--        <el-button size="mini" class="el-icon-arrow-left" v-if="!isCollapse" type="info" circle></el-button>-->
+<!--        <el-button size="mini" class="el-icon-arrow-right" v-else type="info" circle></el-button>-->
+<!--      </el-menu-item>-->
+      <el-menu-item>
+        <el-icon size="mini" class="el-icon-setting" circle></el-icon>
       </el-menu-item>
       <el-menu-item
           v-for="(item, key) in bannerList"

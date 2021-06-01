@@ -1,6 +1,6 @@
 <template>
   <div class="Echarts">
-    <div id="bugCountByDate" style="width: 100rem;height:400px;"></div>
+    <div id="bugCountByDate" style="width: 100%;height:300px;"></div>
   </div>
 </template>
 
@@ -93,19 +93,20 @@ export default {
             return [pt[0], '10%'];
           }
         },
-        title: {
-          left: 'center',
-          text: '异常新增趋势',
-        },
-        toolbox: {
-          feature: {
-            dataZoom: {
-              yAxisIndex: 'none'
-            },
-            restore: {},
-            saveAsImage: {}
-          }
-        },
+        // title: {
+        //   left: 'left',
+        //   text: '异常新增趋势',
+        //   top: "0%"
+        // },
+        // toolbox: {
+        //   feature: {
+        //     dataZoom: {
+        //       yAxisIndex: 'none'
+        //     },
+        //     restore: {},
+        //     saveAsImage: {}
+        //   }
+        // },
         xAxis: {
           type: 'category',
           boundaryGap: false,
@@ -123,6 +124,12 @@ export default {
           start: 0,
           end: 10
         }],
+        grid: {
+          left: "4%",
+          top: "5%",
+          right: "2%",
+          bottom: "22%"
+        },
         series: [
           {
             name: '新增异常',
